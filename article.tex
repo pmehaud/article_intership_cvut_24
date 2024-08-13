@@ -1,4 +1,5 @@
 \documentclass[lettersize,journal]{IEEEtran}
+\usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsfonts}
 \usepackage{algorithmic}
 \usepackage{algorithm}
@@ -10,17 +11,107 @@
 \usepackage{verbatim}
 \usepackage{graphicx}
 \usepackage{cite}
+\usepackage{booktabs}
+\usepackage[acronym]{glossaries}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 0},pdfborderstyle={},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{
+ urlcolor=blue, linkcolor=black}
 \hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
 
-\begin{document}
+\global\long\def\BDsites{\textsf{BD\_sites}}
 
-\title{Neigbouring methods applied to telephonic base stations}
-
+\title{Adaptative neigbouring methods applied to telephonic base stations}
 \author{Paul MÉHAUD, Brendan SÉVELLEC}
 
+\makeglossaries
+
+\newacronym{arcep}{ARCEP}{French Regulatory Authority for Electronic Communications and Posts}
+\newacronym{anfr}{ANFR}{French National Frequency Agency}
+
+\begin{document}
 \maketitle
 
+\begin{abstract}
+  blabla
+\end{abstract}
+
 \section{Introduction}
+
+\section{Related works}
+
+\section{Databases}
+La base de données principale que nous allons utiliser est le résultat des recherches précédentes de Delphine PAQUIRY.
+En effet, l'année dernière une partie de son stage 
+
+\subsection{Main database}
+
+\cite{main_database}
+
+\begin{table}[!b]
+    \centering
+    \caption{Description of the dataset}
+    \label{data_columns}
+    \begin{tabular}{ll}
+        \toprule
+        \textbf{Column} & \textbf{Description} \\
+        \cmidrule(lr){1-2}
+        \textsl{BS\_anfr\_id} & \acrshort{anfr} base station ID \\ 
+        \textsl{x, y, latitude, longitude} & Base station coordinates \\ 
+        \textsl{nom\_reg, nom\_dep, nom\_com} & Additional location information \\  
+        \textsl{site\_2g, 3g, 4g, 5g} & Technology used by the base station \\ 
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+On portera surtout notre attention sur les champs suivants :
+\begin{enumerate}
+    \item \textsl{longitude}, \textsl{latitude} : coordonnées de chaque site;
+    \item \textsl{nom\_op} : nom commercial de l'opérateur;
+    \item \textsl{nom\_reg}, \textsl{nom\_dep} et \textsl{nom\_com} : nom de la région, du département et de la commune d'implantation du site;
+    \item \textsl{site\_$x$g} : équipement du site en technologie $x$G ($x\in\{ 2,\dots,5\}$);
+    \item \textsl{num\_site} : identifiant du site issu du SI de l'opérateur. 
+\end{enumerate}
+
+\section{Finding potential neighbours}
+\noindent When we are looking for neighbours, we need, at first, a list of potential neighbours for each base stations.
+Here are the different methods we can use to solve this problem:
+
+\subsection{Delaunay triangulation}
+\noindent The Delaunay triangulation is named after Boris DELAUNAY for his work on it from 1934 [citer l'article].
+
+The principle of this method is quite simple. Let $P$ be a set of points in the plane and $D(P)$ the triangulation we are looking for.
+A triangle $t_i$ is in $D(P)$ if its circumcircle does not contain any point inside (it can contain points on the border).
+
+However, a Delaunay triangulation is not unique.
+
+You can find an illustration of this method in figure \ref{del_tri}.
+\begin{figure}[!t]
+    \centering
+    \includegraphics[width=2.5in]{images/illus_graphs/Delaunay_circumcircles_vectorial.svg.png}
+    \caption{Example of a Delaunay triangulation}
+    \label{del_tri}
+\end{figure}
+
+\subsection{Gabriel graph}
+\noindent The Gabriel graph is a subgraph of a Delaunay triangulation. Thus, if the Delaunay triangulation is given, it can be found in a linear time. 
+
+Gabriel graphs are named after K. Ruben Gabriel, who introduced them in a paper with Robert R. Sokal in 1969[citer].
+
+The principle is really close to the one presented before. Let $G$
+
+\subsection{$k$-NN graph}
+
+\section{Results}
+
+\section{Conclusion}
+
+[Ouverture : prendre en compte les zazimuths]
+
+\printglossary[type=\acronymtype]
 
 \bibliographystyle{alpha}
 \bibliography{./biblio.bib}

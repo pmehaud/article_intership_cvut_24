@@ -1,13 +1,14 @@
-CMD=pdflatex
-BIB_CMD=bibtex
+LATEX=rubber --pdf
 OUT_DIR=out
 INP_DIR=.
 
+FILENAME=article
+
 all:
-	$(CMD) -output-directory $(OUT_DIR) $(INP_DIR)/article.tex
-	$(BIB_CMD) $(OUT_DIR)/article
-	$(CMD) -output-directory $(OUT_DIR) $(INP_DIR)/article.tex
-	$(CMD) -output-directory $(OUT_DIR) $(INP_DIR)/article.tex
+	$(LATEX) $(FILENAME).tex
+	bibtex $(FILENAME)
+	makeglossaries $(FILENAME)
+	$(LATEX) $(FILENAME).tex
 
 clean:
-	rm -f ./$(OUT_DIR)/*
+	rubber --clean $(FILENAME).tex
