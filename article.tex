@@ -14,13 +14,12 @@
 \usepackage{cite}
 \usepackage{booktabs}
 \usepackage{units}
-\usepackage[acronym]{glossaries}
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
- breaklinks=false,pdfborder={0 0 0},pdfborderstyle={},backref=false,colorlinks=true]
- {hyperref}
+ breaklinks=false,pdfborder={0 0 0},pdfborderstyle={},backref=false,colorlinks=true]{hyperref}
 \hypersetup{
  urlcolor=blue, linkcolor=black}
+\usepackage[acronym]{glossaries}
 \hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
 
 \global\long\def\BDsites{\textsf{BD\_sites}}
@@ -30,9 +29,17 @@
 
 \makeglossaries
 
+\setglossarypreamble{All definitions are from \href{https://www.dictionary.com/}{Dictionnary.com}}
+
+\newglossaryentry{base station}
+{
+    name=base station,
+    description={A fixed transmitter that forms part of an otherwise mobile radio network}
+}
+
 \newacronym{arcep}{ARCEP}{French Regulatory Authority for Electronic Communications and Posts}
 \newacronym{anfr}{ANFR}{French National Frequency Agency}
-\newacronym{bs}{BS}{Base Station}
+\newacronym{bs}{BS}{\Gls{base station}}
 
 \usepackage[english,french]{babel}
 
@@ -211,6 +218,7 @@ For each \acrshort{bs}, we
 [Ouverture : prendre en compte les zazimuths]
 
 \printglossary[type=\acronymtype]
+\printglossary
 
 \bibliographystyle{alpha}
 \bibliography{./biblio.bib}
