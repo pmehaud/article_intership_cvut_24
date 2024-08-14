@@ -40,6 +40,8 @@
 \newacronym{arcep}{ARCEP}{French Regulatory Authority for Electronic Communications and Posts}
 \newacronym{anfr}{ANFR}{French National Frequency Agency}
 \newacronym{bs}{BS}{\Gls{base station}}
+\newacronym{dbscan}{DBScan}{Density-Based Spatial Clustering of Applications with Noise}
+\newacronym{hdbscan}{HDBScan}{Hierarchical Density-Based Spatial Clustering of Applications with Noise}
 
 \usepackage[english,french]{babel}
 
@@ -106,7 +108,7 @@ A triangle $t_i$ is in $D(P)$ if its circumcircle does not contain any point ins
 
 However, a Delaunay triangulation is not unique.
 
-You can find an illustration of this method in figure \ref{del_tri}.
+You can find an illustration of this method in Figure~\ref{del_tri}.
 \begin{figure}[!t]
     \centering
     \includegraphics[width=2.5in]{images/illus_graphs/Delaunay_circumcircles_vectorial.svg.png}
@@ -138,17 +140,22 @@ The main innovation of our work is to take in account the difference of \acrshor
 \subsection{Measurement of \acrshort{bs} density}
 \noindent To simplify the explanation, and because it is related, we will assume that solving this problem is equivalent to finding the \acrshort{bs} situated in \og cities\fg{}.
 
-\subsubsection{DBScan}
+\subsubsection{\acrshort{dbscan}}
+When thinking of density-based clustering, one of the first methods that comes in mind is probably \acrshort{dbscan}.
+It is really powerful because we only have two parameters to modify.
 
-\subsubsection{HDBScan}
+Despite the efficiency of this method, it is not the best adapted to our problem because it's only giving us if a \acrshort{bs} is considered in a city or not.
+We wanted a more continuous method.
+
+\subsubsection{\acrshort{hdbscan}}
 
 \subsubsection{$3$-NN mean distance}
-One provider $\gamma$
+To classify each base station we need a method.
 
-To classify each base station we need a method. Here, we will take the mean distance to the 3 nearest neighbours.
+For each base station the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma$, in $\unit{km}$), thus making it possible to classify each base station into four different categories listed in Table~\ref{crit_summary}.
 
-Let's call this value $\gamma$, in $\unit{km}$. So, we have 4 different categories.
-For each category, we will apply a different distance and angle criterion :
+To make this method working properly, only \acrshort{bs} from one provider have to be kept into the calculation process.
+Moreover, this values are working well on France but it is not proven that it can work in another country. If someone uses this methods, values could be modified.
 
 \subsection{Filtering criteria}
 
@@ -207,7 +214,8 @@ For each category, we will apply a different distance and angle criterion :
 Each \acrshort{bs} has its proper coverage area, which is not infinite. As a matter of fact, we need to suppress longer edges.
 
 \subsubsection{Angle criterion}
-For each \acrshort{bs}, we 
+For each \acrshort{bs}, a potential neighbour can be \og hidden\fg{} by another one which nearer because there is a too narrow angle between those two \acrshort{bs}.
+This criterion, will therefore suppress the longest edge between two \acrshort{bs} separated by a too small angle. This is illustrated in Figure \ref{crit_ang}.
 
 \subsubsection{Quadrant criterion}
 
