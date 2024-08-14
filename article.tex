@@ -106,7 +106,16 @@
 
 \section{Finding potential neighbours}
 \noindent When we are looking for neighbours, we need, at first, a list of potential neighbours for each \acrfull{bs}.
-Here are the different methods we can use to solve this problem:
+For that, we will construct a neigbouring graph $G = (P, U)$ (each base station that are considered neighbors are
+connected by an edge) where $P$ is the set of all base stations. 
+Here are the different methods we can build this graph with:
+
+\subsection{$k$-NN graph}
+\noindent The most intuitive method is to connect each \acrshort{bs} to its $k$ nearest neighbours, where $k \in \mathbb{N}^*$ 
+is a parameter to be fixed. 
+
+However, this method can be criticized, because it always finds $k$ neighbor to each base stations, no matter the reality of the 
+data.
 
 \subsection{Delaunay triangulation}
 \noindent The Delaunay triangulation is named after Boris DELAUNAY for his work on it from 1934 \cite{art_delaunay}.
@@ -114,9 +123,17 @@ Here are the different methods we can use to solve this problem:
 A Delaunay triangulation of a set of points in the plane subdivides their \gls{convHull} into triangles whose circumcircles 
 do not contain any of the points. You can find an illustration of this method in Figure~\ref{del_tri}.
 
-It can be associated with an unoriented graph $G = (P, U)$ where $U$ is composed of every edge of $D(P)$.
-Therefore, it is often used as a method to detect the closest neighbors \cite{delaunay_neighbor} (each nodes that are considered neighbors are
-connected by an edge in $G$).
+A Voronoi diagram is a tessellation pattern in which $n$ points scattered on a plane subdivides in 
+exactly $n$ cells enclosing a portion of the plane that is closest to each point. 
+
+The Delaunay triangulation is the pendant of the Voronoi diagram in the sense that two points are connected in the
+Delaunay triangulation if their associated cells share an edge in the Voronoi diagram. 
+
+Therefore, another approach, consists in computing a Delaunay triangulation and build a neighouring graph $G = (P, U)$ where $U$ 
+is composed of every edge of $D(P)$. Which is equivalent to consider two base station as potential neighbors if their associated
+cells are touching each other in the Voronoi diagram.
+
+This method has already been used in articles in the past \cite{delaunay_neighbor}.
 
 
 \begin{figure}[!t]
@@ -131,14 +148,9 @@ connected by an edge in $G$).
 
 Gabriel graphs are named after K. Ruben Gabriel, who introduced them in a paper with Robert R. Sokal in 1969 \cite{art_gabriel}.
 
-Formally, it is the graph $G$ with vertex set $S$ in which any two distinct points $p\in S$ and $q\in S$ are adjacent precisely when the closed disc having pq as a diameter contains no other points.
+Formally, it is the graph $G = (P, U)$ in which any two distinct points $p, q \in P$ are adjacent precisely when the closed disc having $pq$ as a diameter contains no other points.
 
 Basically, the interset of this method, compared to the Delaunay triangulation, is that it is adding a first level of filtration for bad neighbouring connexions.
-
-\subsection{$k$-NN graph}
-\noindent Nevertheless, the two methods presented above are triangulation, that is to say that they do not connect each \acrshort{bs} to all of its potential neighbours.
-
-One simple idea to get rid of this problem could be solved by connecting each \acrshort{bs} to its $k$ nearest neighbours.
 
 \section{Finding the real neighbours}
 
