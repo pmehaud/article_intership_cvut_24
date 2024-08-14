@@ -37,6 +37,14 @@
     description={A fixed transmitter that forms part of an otherwise mobile radio network}
 }
 
+\newglossaryentry{convHull}
+{
+    name=convex hull,
+    description={The smallest convex set containing a given set}
+}
+
+
+
 \newacronym{arcep}{ARCEP}{French Regulatory Authority for Electronic Communications and Posts}
 \newacronym{anfr}{ANFR}{French National Frequency Agency}
 \newacronym{bs}{BS}{\Gls{base station}}
@@ -103,7 +111,7 @@ Here are the different methods we can use to solve this problem:
 \subsection{Delaunay triangulation}
 \noindent The Delaunay triangulation is named after Boris DELAUNAY for his work on it from 1934 [citer l'article].
 
-A Delaunay triangulation of a set of points in the plane subdivides their convex hull into triangles whose circumcircles 
+A Delaunay triangulation of a set of points in the plane subdivides their \gls{convHull} into triangles whose circumcircles 
 do not contain any of the points. You can find an illustration of this method in Figure~\ref{del_tri}.
 
 It can be associated with an unoriented graph $G = (P, U)$ where $U$ is composed of every edge of $D(P)$.
@@ -230,7 +238,7 @@ This criterion, will therefore suppress the longest edge between two \acrshort{b
 \printglossary[type=\acronymtype]
 \printglossary
 
-\bibliographystyle{alpha}
+\bibliographystyle{IEEEtran}
 \bibliography{./biblio.bib}
 
 \end{document}
