@@ -162,7 +162,7 @@ We wanted a more continuous method.
 \subsubsection{$3$-NN mean distance}
 To classify each base station we need a method.
 
-For each base station the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma$, in $\unit{km}$), thus making it possible to classify each base station into four different categories listed in Table~\ref{crit_summary}.
+For each base station the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma_i$, in $\unit{km}$), thus making it possible to classify each base station into four different categories listed in Table~\ref{crit_summary}.
 
 To make this method working properly, only \acrshort{bs} from one provider have to be kept into the calculation process.
 Moreover, this values are working well on France but it is not proven that it can work in another country. If someone uses this methods, values could be modified.
@@ -175,7 +175,7 @@ Moreover, this values are working well on France but it is not proven that it ca
     \label{crit_summary}
     \begin{tabular}{clcc}
         \toprule
-        \textbf{$\gamma$} & \textbf{Description} & \textbf{max\_distance} & \textbf{min\_angle} \\
+        \textbf{$\gamma_i$} & \textbf{Description} & \textbf{max\_distance} & \textbf{min\_angle} \\
         \cmidrule(lr){1-4}
         $\left[0, 1\right]$ & city center & $\unit[2]{km}$ & $5^\circ$ \\
         $\left]1, 2\right]$ & urban area & $\unit[5]{km}$ & $10^\circ$ \\
