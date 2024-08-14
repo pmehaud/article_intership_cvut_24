@@ -86,12 +86,12 @@
     This database \cite{main_database} contains all the information needed to the application of the method. It is from
     \acrfull{arcep}, which is an independent French administrative authority responsible for regulating electronic and postal communications and press distribution.
 
-    The fields that are being used here are described in Table~\ref{data_columns}.
+    The fields that are being used here are described in Table~\ref{table:data_columns}.
 
 \begin{table}[!b]
     \centering
     \caption{Description of the dataset}
-    \label{data_columns}
+    \label{table:data_columns}
     \begin{tabular}{ll}
         \toprule
         \textbf{Column} & \textbf{Description} \\
@@ -121,7 +121,7 @@ data.
 \noindent The Delaunay triangulation is named after Boris DELAUNAY for his work on it from 1934 \cite{art_delaunay}.
 
 A Delaunay triangulation of a set of points in the plane subdivides their \gls{convHull} into triangles whose circumcircles 
-do not contain any of the points. You can find an illustration of this method in Figure~\ref{del_tri}.
+do not contain any of the points. You can find an illustration of this method in Figure~\ref{fig:del_tri}.
 
 A Voronoi diagram is a tessellation pattern in which $n$ points scattered on a plane subdivides in 
 exactly $n$ cells enclosing a portion of the plane that is closest to each point. 
@@ -141,7 +141,7 @@ This method has already been used in articles in the past \cite{delaunay_neighbo
     \boxed{\includegraphics[width=1.25in]{images/illus_graphs/Delaunay_circumcircles_vectorial.png}}
     \boxed{\includegraphics[width=1.25in]{images/illus_graphs/Delaunay_Voronoi.png}}
     \caption{Example of a Delaunay triangulation (in black) and Voronoi tessellation (in red)}
-    \label{del_tri}
+    \label{fig:del_tri}
 \end{figure}
 
 \subsection{Gabriel graph}
@@ -177,7 +177,7 @@ We wanted a more continuous method.
 \subsubsection{$3$-NN mean distance}
 To classify each base station we need a method.
 
-For each base station the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma_i$, in $\unit{km}$), thus making it possible to classify each base station into four different categories listed in Table~\ref{crit_summary}.
+For each base station the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma_i$, in $\unit{km}$), thus making it possible to classify each base station into four different categories listed in Table~\ref{table:crit_summary}.
 
 To make this method working properly, only \acrshort{bs} from one provider have to be kept into the calculation process.
 Moreover, this values are working well on France but it is not proven that it can work in another country. If someone uses this methods, values could be modified.
@@ -187,7 +187,7 @@ Moreover, this values are working well on France but it is not proven that it ca
 \begin{table}[!b]
     \centering
     \caption{Summary of criteria values}
-    \label{crit_summary}
+    \label{table:crit_summary}
     \begin{tabular}{clcc}
         \toprule
         \textbf{$\gamma_i$} & \textbf{Description} & \textbf{max\_distance} & \textbf{min\_angle} \\
@@ -204,35 +204,35 @@ Moreover, this values are working well on France but it is not proven that it ca
     \centering
     \includegraphics[width=2.5in]{images/illus_crit/points.png}
     \caption{Example of a Delaunay triangulation}
-    \label{crit_pts}
+    \label{table:crit_pts}
 \end{figure}
 
 \begin{figure}[!b]
     \centering
     \includegraphics[width=2.5in]{images/illus_crit/distance_elim.png}
     \caption{Example of a Delaunay triangulation}
-    \label{crit_dis}
+    \label{table:crit_dis}
 \end{figure}
 
 \begin{figure}[!t]
     \centering
     \includegraphics[width=2.5in]{images/illus_crit/angle_elim.png}
     \caption{Example of a Delaunay triangulation}
-    \label{crit_ang}
+    \label{table:crit_ang}
 \end{figure}
 
 \begin{figure}[!b]
     \centering
     \includegraphics[width=2.5in]{images/illus_crit/quadrant_elim.png}
     \caption{Example of a Delaunay triangulation}
-    \label{crit_qua}
+    \label{table:crit_qua}
 \end{figure}
 
 \begin{figure}[!t]
     \centering
     \includegraphics[width=2.5in]{images/illus_crit/neighs.png}
     \caption{Example of a Delaunay triangulation}
-    \label{crit_nei}
+    \label{table:crit_nei}
 \end{figure}
 
 \subsubsection{Distance criterion}
@@ -240,7 +240,7 @@ Each \acrshort{bs} has its proper coverage area, which is not infinite. As a mat
 
 \subsubsection{Angle criterion}
 For each \acrshort{bs}, a potential neighbour can be \og hidden\fg{} by another one which nearer because there is a too narrow angle between those two \acrshort{bs}.
-This criterion, will therefore suppress the longest edge between two \acrshort{bs} separated by a too small angle. This is illustrated in Figure \ref{crit_ang}.
+This criterion, will therefore suppress the longest edge between two \acrshort{bs} separated by a too small angle. This is illustrated in Figure \ref{table:crit_ang}.
 
 \subsubsection{Quadrant criterion}
 
