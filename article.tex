@@ -156,11 +156,11 @@ Basically, the interset of this method, compared to the Delaunay triangulation, 
 \section{Finding the real neighbours}
 
 \noindent Each of the precedent methods gives us a list of potential neighbours for each \acrshort{bs}. However, we know that some of this neighbouring connexions are wrong,
-because some \acrshort{bs} will be \og hidden\fg{} by others.
+either because of the neighboring graph construction method or physical specificities linked to the base stations themselves.
 
-Thus, we need to find methods to suppress bad connexions. That was made by Delphine.
+Thus, we need to find methods to detetect and erase these bad connexions.
 
-The main innovation of our work is to take in account the difference of \acrshort{bs}'s density.
+The main innovation of our work compared to this one \cite{art_del_paq} is to take in account the difference of \acrshort{bs}'s density.
 
 \subsection{Measurement of \acrshort{bs} density}
 \noindent To simplify the explanation, and because it is related, we will assume that solving this problem is equivalent to finding the \acrshort{bs} situated in \og cities\fg{}.
