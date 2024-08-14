@@ -86,7 +86,7 @@
     This database \cite{main_database} contains all the information needed to the application of the method. It is from
     \acrfull{arcep}, which is an independent French administrative authority responsible for regulating electronic and postal communications and press distribution.
 
-    The fields that are being used here are described in Table~\ref{data_columns}
+    The fields that are being used here are described in Table~\ref{data_columns}.
 
 \begin{table}[!b]
     \centering
@@ -109,7 +109,7 @@
 Here are the different methods we can use to solve this problem:
 
 \subsection{Delaunay triangulation}
-\noindent The Delaunay triangulation is named after Boris DELAUNAY for his work on it from 1934 [citer l'article].
+\noindent The Delaunay triangulation is named after Boris DELAUNAY for his work on it from 1934 \cite{art_delaunay}.
 
 A Delaunay triangulation of a set of points in the plane subdivides their \gls{convHull} into triangles whose circumcircles 
 do not contain any of the points. You can find an illustration of this method in Figure~\ref{del_tri}.
@@ -129,7 +129,7 @@ connected by an edge in $G$).
 \subsection{Gabriel graph}
 \noindent The Gabriel graph is a subgraph of a Delaunay triangulation. Thus, if the Delaunay triangulation is given, it can be found in a linear time. 
 
-Gabriel graphs are named after K. Ruben Gabriel, who introduced them in a paper with Robert R. Sokal in 1969[citer].
+Gabriel graphs are named after K. Ruben Gabriel, who introduced them in a paper with Robert R. Sokal in 1969 \cite{art_gabriel}.
 
 Formally, it is the graph $G$ with vertex set $S$ in which any two distinct points $p\in S$ and $q\in S$ are adjacent precisely when the closed disc having pq as a diameter contains no other points.
 
