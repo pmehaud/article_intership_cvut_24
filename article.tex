@@ -1,7 +1,7 @@
 \documentclass[lettersize,journal,english]{IEEEtran}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amsfonts}
+\usepackage{amsmath,amsfonts,amssymb}
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{array}
@@ -64,9 +64,9 @@
     measure of the density of base station.
 
     For that, it is necessary to describe and analyse the databases that have been used during the research, then to present 
-    the different appoaches that always consist of these steps : establish a first neighbouring graph, compute the base station 
+    the different approaches that always consist of these steps : establish a first neighbouring graph, compute the base station 
     densities and filter this graph with different criteria using this information. The final step is to present the results
-    of the different approches and conclude.
+    of the different approaches and conclude.
 \section{Related works}
 
 \section{Databases}
@@ -78,7 +78,7 @@
     This database \cite{main_database} contains all the information needed to the application of the method. It is from
     \acrfull{arcep}, which is a french national organisation that
 
-    The fields that are being used here are the following :
+    The fields that are being used here are described in Table~\ref{data_columns}
 
 \begin{table}[!b]
     \centering
@@ -103,12 +103,14 @@ Here are the different methods we can use to solve this problem:
 \subsection{Delaunay triangulation}
 \noindent The Delaunay triangulation is named after Boris DELAUNAY for his work on it from 1934 [citer l'article].
 
-The principle of this method is quite simple. Let $P$ be a set of points in the plane and $D(P)$ the triangulation we are looking for.
-A triangle $t_i$ is in $D(P)$ if its circumcircle does not contain any point inside (it can contain points on the border).
+A Delaunay triangulation of a set of points in the plane subdivides their convex hull into triangles whose circumcircles 
+do not contain any of the points. You can find an illustration of this method in Figure~\ref{del_tri}.
 
-However, a Delaunay triangulation is not unique.
+It can be associated with an unoriented graph $G = (P, U)$ where $U$ is composed of every edge of $D(P)$.
+Therefore, it is often used as a method to detect the closest neighbors \cite{delaunay_neighbor} (each nodes that are considered neighbors are
+connected by an edge in $G$).
 
-You can find an illustration of this method in Figure~\ref{del_tri}.
+
 \begin{figure}[!t]
     \centering
     \includegraphics[width=2.5in]{images/illus_graphs/Delaunay_circumcircles_vectorial.svg.png}
