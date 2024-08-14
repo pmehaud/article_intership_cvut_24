@@ -41,20 +41,35 @@
 \maketitle
 
 \begin{abstract}
-  blabla
+  The field of telecommunication represents a gigantic mine of information, the smartphone penetration rate being 69\%
+  in 2023 in the world, and 97\% in France. Therefore, the collected datas represent a big opportunity for telecommunication
+  companies to predict their customers behaviour for internal or marketing purposes. Thus, it is primordial for these companies
+  to be able to determinate if a user is moving. For that, it is necessary to understand the neighbouring relationships between the 
+  telephonic base stations. This article aims at comparing different method, ellaborated in order to adaptively detect these
+  relationship between telephonic base stations given their geographical positions.
 \end{abstract}
 
 \section{Introduction}
+    \IEEEPARstart{T}{his} article is the continuation of the work done by Delphine Paquiry in this paper \cite{art_del_paq}.
+    It aims at discovering the neighbouring relationships between base stations from their geographical positions, using a 
+    measure of the density of base station.
 
+    For that, it is necessary to describe and analyse the databases that have been used during the research, then to present 
+    the different appoaches that always consist of these steps : establish a first neighbouring graph, compute the base station 
+    densities and filter this graph with different criteria using this information. The final step is to present the results
+    of the different approches and conclude.
 \section{Related works}
 
 \section{Databases}
-La base de données principale que nous allons utiliser est le résultat des recherches précédentes de Delphine PAQUIRY.
-En effet, l'année dernière une partie de son stage 
+    Several databases have been used in order to test the different aspects of the methods. However, one of
+    them is directly necessary to the method itself.
 
-\subsection{Main database}
+    \subsection{Main database}
 
-\cite{main_database}
+    This database \cite{main_database} contains all the information needed to the application of the method. It is from
+    \acrfull{arcep}, which is a french national organisation that
+
+    The fields that are being used here are the following :
 
 \begin{table}[!b]
     \centering
@@ -71,16 +86,6 @@ En effet, l'année dernière une partie de son stage
         \bottomrule
     \end{tabular}
 \end{table}
-
-
-On portera surtout notre attention sur les champs suivants :
-\begin{enumerate}
-    \item \textsl{longitude}, \textsl{latitude} : coordonnées de chaque site;
-    \item \textsl{nom\_op} : nom commercial de l'opérateur;
-    \item \textsl{nom\_reg}, \textsl{nom\_dep} et \textsl{nom\_com} : nom de la région, du département et de la commune d'implantation du site;
-    \item \textsl{site\_$x$g} : équipement du site en technologie $x$G ($x\in\{ 2,\dots,5\}$);
-    \item \textsl{num\_site} : identifiant du site issu du SI de l'opérateur. 
-\end{enumerate}
 
 \section{Finding potential neighbours}
 \noindent When we are looking for neighbours, we need, at first, a list of potential neighbours for each \acrfull{bs}.
