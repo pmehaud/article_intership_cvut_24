@@ -151,7 +151,7 @@ Gabriel graphs are named after K. Ruben Gabriel, who introduced them in a paper 
 
 Formally, it is the graph $G = (P, U)$ in which any two distinct points $p, q \in P$ are adjacent precisely when the closed disc having $pq$ as a diameter contains no other points.
 
-Basically, the interset of this method, compared to the Delaunay triangulation, is that it is adding a first level of filtration for bad neighbouring connexions.
+Basically, the interset of this method, compared to the Delaunay triangulation, is that it is adding a first level of filtration to suppress some neighbouring connexions.
 
 \section{Finding the real neighbours}
 
@@ -190,7 +190,7 @@ Moreover, this values are working well on France but it is not proven that it ca
     \label{table:crit_summary}
     \begin{tabular}{clcc}
         \toprule
-        \textbf{$\gamma_i$} & \textbf{Description} & \textbf{max\_distance} & \textbf{min\_angle} \\
+        \textbf{$\gamma_i$} & \textbf{Description} & \textbf{\emph{max\_distance}} & \textbf{\emph{min\_angle}} \\
         \cmidrule(lr){1-4}
         $\left[0, 1\right]$ & city center & $\unit[2]{km}$ & $5^\circ$ \\
         $\left]1, 2\right]$ & urban area & $\unit[5]{km}$ & $10^\circ$ \\
@@ -204,47 +204,57 @@ Moreover, this values are working well on France but it is not proven that it ca
     \centering
     \boxed{\includegraphics[width=2.5in]{images/illus_crit/points.png}}
     \caption{Example of a Delaunay triangulation}
-    \label{table:crit_pts}
+    \label{fig:crit_pts}
 \end{figure}
 
 \begin{figure}[!b]
     \centering
     \boxed{\includegraphics[width=2.5in]{images/illus_crit/distance_elim.png}}
     \caption{Example of a Delaunay triangulation}
-    \label{table:crit_dis}
+    \label{fig:crit_dis}
 \end{figure}
 
 \begin{figure}[!t]
     \centering
     \boxed{\includegraphics[width=2.5in]{images/illus_crit/angle_elim.png}}
     \caption{Example of a Delaunay triangulation}
-    \label{table:crit_ang}
+    \label{fig:crit_ang}
 \end{figure}
 
 \begin{figure}[!b]
     \centering
     \boxed{\includegraphics[width=2.5in]{images/illus_crit/quadrant_elim.png}}
     \caption{Example of a Delaunay triangulation}
-    \label{table:crit_qua}
+    \label{fig:crit_qua}
 \end{figure}
 
 \begin{figure}[!t]
     \centering
     \boxed{\includegraphics[width=2.5in]{images/illus_crit/neighs.png}}
     \caption{Example of a Delaunay triangulation}
-    \label{table:crit_nei}
+    \label{fig:crit_nei}
 \end{figure}
 
 \subsubsection{Distance criterion}
-Each \acrshort{bs} has its proper coverage area, which is not infinite. As a matter of fact, we need to suppress longer edges.
+When looking at the results of Delaunay triangulation, we realise that some edges, mostly on the border of $P$ are too long. Indeed, a \acrshort{bs} does not have an infinite coverage area.
+
+As a consequence, for each \acrshort{bs} the neighbouring connexions that are longer than a certain value, called \emph{max\_distance}, are suppressed (cf. Table~\ref{table:crit_summary}).
 
 \subsubsection{Angle criterion}
 For each \acrshort{bs}, a potential neighbour can be \og hidden\fg{} by another one which nearer because there is a too narrow angle between those two \acrshort{bs}.
-This criterion, will therefore suppress the longest edge between two \acrshort{bs} separated by a too small angle. This is illustrated in Figure \ref{table:crit_ang}.
+This criterion, will therefore suppress the longest edge between two \acrshort{bs} separated by a too small angle. This is illustrated in Figure~\ref{fig:crit_ang}.
 
 \subsubsection{Quadrant criterion}
 
 \section{Results}
+
+\subsection{Combining criteria}
+As a matter of optimisation, criteria are applied one after another. For example, the base graph is Delaunay triangulation and we apply distance then angle.
+The principle is that angle criterion will be applied on the Delaunay graph filtered with the distance criterion.
+
+As a consequence, results differ according to the order in which the criteria are applied.
+
+The best is Delaunay with distance and then angle.
 
 \section{Conclusion}
 
