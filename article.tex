@@ -82,7 +82,6 @@
     them is directly necessary to the method itself.
 
     \subsection{Main database}
-
     This database \cite{main_database} contains all the information needed to the application of the method. It is from
     \acrfull{arcep}, which is an independent French administrative authority responsible for regulating electronic and postal communications and press distribution.
 
@@ -154,7 +153,6 @@ Formally, it is the graph $G = (P, U)$ in which any two distinct points $p, q \i
 Basically, the interset of this method, compared to the Delaunay triangulation, is that it is adding a first level of filtration to suppress some neighbouring connexions.
 
 \section{Finding the real neighbours}
-
 \noindent Each of the precedent methods gives us a list of potential neighbours for each \acrshort{bs}. However, we know that some of this neighbouring connexions are wrong,
 either because of the neighboring graph construction method or physical specificities linked to the base stations themselves.
 
@@ -163,7 +161,16 @@ Thus, we need to find methods to detetect and erase these bad connexions.
 The main innovation of our work compared to this one \cite{art_del_paq} is to take in account the difference of \acrshort{bs}'s density.
 
 \subsection{Measurement of \acrshort{bs} density}
-\noindent To simplify the explanation, and because it is related, we will assume that solving this problem is equivalent to finding the \acrshort{bs} situated in \og cities\fg{}.
+\noindent To make it easier to understand, and because it is related,
+we will assume that solving this problem is equivalent to finding the \acrshort{bs} situated in \og cities\fg{}.
+
+Moreover, to simplify the problem, each \acrshort{bs} will be classified in one of this four categories :
+\begin{itemize}
+    \item \emph{city center};
+    \item \emph{urban area};
+    \item \emph{extra-urban area};
+    \item \emph{courntryside}.
+\end{itemize}
 
 \subsubsection{\acrshort{dbscan}}
 When thinking of density-based clustering, one of the first methods that comes in mind is probably \acrshort{dbscan}.
@@ -188,14 +195,14 @@ Moreover, this values are working well on France but it is not proven that it ca
     \centering
     \caption{Summary of criteria values}
     \label{table:crit_summary}
-    \begin{tabular}{clcc}
+    \begin{tabular}{lcc}
         \toprule
-        \textbf{$\gamma_i$} & \textbf{Description} & \textbf{\emph{max\_distance}} & \textbf{\emph{min\_angle}} \\
-        \cmidrule(lr){1-4}
-        $\left[0, 1\right]$ & city center & $\unit[2]{km}$ & $5^\circ$ \\
-        $\left]1, 2\right]$ & urban area & $\unit[5]{km}$ & $10^\circ$ \\
-        $\left]2, 4\right]$ & extra-urban area & $\unit[10]{km}$ & $15^\circ$ \\
-        $\left]4, \infty\right[$ & courntryside & $\unit[15]{km}$ & $20^\circ$ \\
+        \textbf{Description} & \textbf{\emph{max\_distance}} & \textbf{\emph{min\_angle}} \\
+        \cmidrule(lr){1-3}
+        city center & $\unit[2]{km}$ & $5^\circ$ \\
+        urban area & $\unit[5]{km}$ & $10^\circ$ \\
+        extra-urban area & $\unit[10]{km}$ & $15^\circ$ \\
+        courntryside & $\unit[15]{km}$ & $20^\circ$ \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -236,13 +243,14 @@ Moreover, this values are working well on France but it is not proven that it ca
 \end{figure}
 
 \subsubsection{Distance criterion}
-When looking at the results of Delaunay triangulation, we realise that some edges, mostly on the border of $P$ are too long. Indeed, a \acrshort{bs} does not have an infinite coverage area.
+When looking at the results of Delaunay triangulation, we realise that some edges, mostly on the border of $P$ are too long.
 
-As a consequence, for each \acrshort{bs} the neighbouring connexions that are longer than a certain value, called \emph{max\_distance}, are suppressed (cf. Table~\ref{table:crit_summary}).
+Indeed, a \acrshort{bs} does not have an infinite coverage area. As a consequence, for each \acrshort{bs} the neighbouring connexions that are longer than a certain value, called \emph{max\_distance} (cf. Table~\ref{table:crit_summary}), are suppressed.
 
 \subsubsection{Angle criterion}
-For each \acrshort{bs}, a potential neighbour can be \og hidden\fg{} by another one which nearer because there is a too narrow angle between those two \acrshort{bs}.
-This criterion, will therefore suppress the longest edge between two \acrshort{bs} separated by a too small angle. This is illustrated in Figure~\ref{fig:crit_ang}.
+Let $p$, $q$, $r$ be three \acrshort{bs} of $P$, where $q$ and $r$ are $p$'s potential neighbours. As said before, coverage areas of \acrshort{bs} are limited by physics, this also implies that $r$ can be \og hidden\fg{} from $p$ by $q$ because $q$ is between $p$ and $r$ [trouver qqch pour prouver ce que je dis].
+
+Therefore, the connexion between $p$ and $r$ needs to be suppressed. How? The angle $\widehat{qrp}$ is calculated and if it is narrower than a certain value, called \emph{min\_angle} (cf. Table~\ref{table:crit_summary}), the longest edge is suppressed.
 
 \subsubsection{Quadrant criterion}
 
