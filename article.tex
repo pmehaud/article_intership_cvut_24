@@ -163,7 +163,7 @@ This method has already been used in articles in the past \cite{delaunay_neighbo
 \subsection{Gabriel graph}
 \noindent The Gabriel graph is a subgraph of a Delaunay triangulation. Thus, if the Delaunay triangulation is given, it can be found in a linear time. 
 
-Gabriel graphs are named after K. Ruben Gabriel, who introduced them in a paper with Robert R. Sokal in 1969 \cite{art_gabriel}.
+Gabriel graphs are named after K. Ruben Gabriel, who introduced them in a paper with Robert R. Sokal in 1969 \cite{10.2307/2412323}.
 
 Formally, it is the graph $G = (P, U)$ in which any two distinct points $p, q \in P$ are adjacent precisely when the closed disc having $pq$ as a diameter contains no other points.
 
@@ -270,6 +270,20 @@ Let $p$, $q$, $r$ be three \acrshort{bs} of $P$, where $q$ and $r$ are $p$'s pot
 Therefore, the connexion between $p$ and $r$ needs to be suppressed. How? The angle $\widehat{qrp}$ is calculated and if it is narrower than a certain value, called \emph{min\_angle} (cf. Table~\ref{table:crit_summary}), the longest edge is suppressed.
 
 \subsubsection{Quadrant criterion}
+A version of this criterion was introduced here \cite{10201211} and used here \cite{art_del_paq}. Its goal is
+to prevent all potential neighbours to be in the same angle range. Therefore, it was mainly thought to be used with the 
+$k$-NN potential neigbours method.
+
+It consists in dividing the space around each base station into quadrants and keeping only a certain number of potential neighbours
+in each of the quadrants. The number of quadrants has been fixed to 6 (optimized here \cite{art_del_paq}).
+
+The criterion has been upgraded by adding the possibility to rotate the quadrants. The offset angle selected, which is between 0 and 
+60 degrees, is the one that maximises the sum of the distances of the potential neighbours to their closest quadrant delimitation.
+
+In other words, it tends to select the angle with which the potential neighbors are as much in the middle of their respective quadrants
+as possible.
+
+The quadrant criterion is illustrated here Fig~\ref{fig:crit_qua}
 
 \section{Results}
 
