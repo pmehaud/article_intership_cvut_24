@@ -75,8 +75,6 @@
     the different approaches that always consist of these steps : establish a first neighbouring graph, compute the base station 
     densities and filter this graph with different criteria using this information. The final step is to present the results
     of the different approaches and conclude.
-
-    \textbf{WE WILL WORK WITH ONLY ONE PROVIDER [ptet le mettre ailleurs].}
 \section{Related works}
 
 \section{Databases}
@@ -101,7 +99,7 @@
             \toprule
             \textbf{Technology} & \textbf{Bouygues} & \textbf{Free} & \textbf{Orange} & \textbf{SFR} & \textbf{Total} \\
             \cmidrule(lr){1-6}
-            \textbf{2G} & 21710 & 0 & 18835 & 20093 & 60638 \\
+            \textbf{2G} &You can 21710 & 0 & 18835 & 20093 & 60638 \\
             \textbf{3G} & 26294 & 25934 & 29748 & 25777 & 107753 \\
             \textbf{4G} & 26231 & 25847 & 30440 & 25881 & 108399 \\
             \textbf{5G} & 11271 & 18607 & 8794 & 10968 & 49640 \\
@@ -117,22 +115,30 @@
         \label{fig:data_technos}
     \end{figure}
 
-\begin{table}[!b]
-    \centering
-    \caption{Description of the dataset}
-    \label{table:data_columns}
-    \begin{tabular}{ll}
-        \toprule
-        \textbf{Column} & \textbf{Description} \\
-        \cmidrule(lr){1-2}
-        \textsl{id\_station\_anfr} & \acrshort{anfr} \acrshort{bs} ID \\ 
-        \textsl{nom\_op} & Name of the provider \\
-        \textsl{x, y, latitude, longitude} & Base station coordinates \\ 
-        \textsl{nom\_reg, nom\_dep, nom\_com} & Additional location information \\  
-        \textsl{site\_2g, 3g, 4g, 5g} & Technology used by the \acrshort{bs} \\ 
-        \bottomrule
-    \end{tabular}
-\end{table}
+    \begin{table}[!b]
+        \centering
+        \caption{Description of the dataset}
+        \label{table:data_columns}
+        \begin{tabular}{ll}
+            \toprule
+            \textbf{Column} & \textbf{Description} \\
+            \cmidrule(lr){1-2}
+            \textsl{id\_station\_anfr} & \acrshort{anfr} \acrshort{bs} ID \\ 
+            \textsl{nom\_op} & Name of the provider \\
+            \textsl{x, y, latitude, longitude} & Base station coordinates \\ 
+            \textsl{nom\_reg, nom\_dep, nom\_com} & Additional location information \\  
+            \textsl{site\_2g, 3g, 4g, 5g} & Technology used by the \acrshort{bs} \\ 
+            \bottomrule
+        \end{tabular}
+    \end{table}
+
+    \subsection{Filtering the database}
+    As seen before this database is really huge, as a matter of fact we will only work on a portion of it.
+
+    Firstly, only one provider will be kept because a \acrshort{bs} from provider $x$ can't be considered as a neighbour of \acrshort{bs} from provider $y$.
+    Consequently, we have chosen \emph{Orange} because it is the one that has the largest number of \acrshort{bs}.
+
+    Secondly, for the same reasons as before, only one technology is kept. Thus, we kept all \acrshort{bs} using, at least, $4G$.
 
 \section{Finding potential neighbours}
 \noindent When we are looking for neighbours, we need, at first, a list of potential neighbours for each \acrfull{bs}.
