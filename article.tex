@@ -215,12 +215,12 @@ That is called density based clustering. The main method to do that is \acrshort
 It consists in detecting clusters based on the density, using two parameters :
 
 \begin{itemize}
-    \item \emph{$\epsilon$} : A distance threshold under which two points are considered close enough to be considered neighbours;   
+    \item \emph{$\varepsilon$} : A distance threshold under which two points are considered close enough to be considered neighbours;   
     \item \emph{$n_{\text{min}}$} : The shortest number of neigbours a points needs to have to be considered as a core point of a cluster.
     
 \end{itemize}
 
-The clusters will then "grow" from the core points by attaching all points close from less than \emph{$epsilon$} than a point of the said 
+The clusters will then \og grow\fg{} from the core points by attaching all points close from less than \emph{$\varepsilon$} than a point of the said 
 cluster.
 
 Despite the efficiency of this method, it is not the best adapted to our problem because it's only giving us if a \acrshort{bs} is considered 
@@ -228,7 +228,7 @@ in a city or not, it doesn't split the points that are in a city into the four c
 
 \subsubsection{\acrshort{hdbscan}}
 This method, introduced here \cite{10.1007/978-3-642-37456-2_14} is a variation of the \acrshort{dbscan} method. It consists
-in selecting the best clusters after testing their persistence by making the $\epsilon$ parameter vary. It's main particularity
+in selecting the best clusters after testing their persistence by making the $\varepsilon$ parameter vary. It's main particularity
 is that it allows to detect clusters of different densities.
 
 To each point who belong to a cluster is associated a probability that symbolises the degree of certainty for this point to belong
@@ -242,7 +242,7 @@ For our use case, we need a more specific method. Here is the explanation of how
 
 For each base station $i$, the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma_i$, in 
 $\unit{km}$). According to the value of $\gamma_i$, the base station can either be classified as part of one of the categroies of 
-Table~\ref{table:crit_summary} (very low value for city center, slighlty higher value for urban area,\dots).
+Table~\ref{table:crit_summary} (very low value for city center, slighlty higher value for urban area, \dots).
 
 To make this method work properly, only \acrshort{bs} from one provider have to be kept into the calculation process.
 
