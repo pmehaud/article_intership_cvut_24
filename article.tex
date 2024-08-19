@@ -86,67 +86,67 @@ brendan.sevellec@insa-rouen.fr}}
 \section{Related works}
 
 \section{Databases}
-    Several databases have been used in order to test the different aspects of the methods. However, one of
-    them is directly necessary to the method itself.
+Several databases have been used in order to test the different aspects of the methods. However, one of
+them is directly necessary to the method itself.
 
-    \subsection{Main database}
-    This database \cite{main_database} contains all the information needed to the application of the method. It is from
-    \acrfull{arcep}, which is an independent French administrative authority responsible for regulating electronic and postal communications and press distribution.
+\subsection{Main database}
+This database \cite{main_database} contains all the information needed to the application of the method. It is from
+\acrfull{arcep}, which is an independent French administrative authority responsible for regulating electronic and postal communications and press distribution.
 
-    The fields that are being used here are described in Table~\ref{table:data_columns}.
+The fields that are being used here are described in Table~\ref{table:data_columns}.
 
-    This database is updated every quarter. For instance, the own we used was published on 28\textsuperscript{th} March 2024 \cite{main_database_hist}.
+This database is updated every quarter. For instance, the own we used was published on 28\textsuperscript{th} March 2024 \cite{main_database_hist}.
 
-    On the site there is a chat where we can ask questions about the databases \cite{main_database_chat}.
+On the site there is a chat where we can ask questions about the databases \cite{main_database_chat}.
 
-    \begin{table}[!b]
-        \centering
-        \caption{Summary of technologies}
-        \label{table:techno_numbers}
-        \begin{tabular}{cccccc}
-            \toprule
-            \textbf{Technology} & \textbf{Bouygues} & \textbf{Free} & \textbf{Orange} & \textbf{SFR} & \textbf{Total} \\
-            \cmidrule(lr){1-6}
-            \textbf{2G} & 21710 & 0 & 18835 & 20093 & 60638 \\
-            \textbf{3G} & 26294 & 25934 & 29748 & 25777 & 107753 \\
-            \textbf{4G} & 26231 & 25847 & 30440 & 25881 & 108399 \\
-            \textbf{5G} & 11271 & 18607 & 8794 & 10968 & 49640 \\
-            \textbf{Total} & 26331 & 25949 & 30540 & 26018 & 108838 \\
-            \bottomrule
-        \end{tabular}
-    \end{table}
+\begin{table}[!b]
+    \centering
+    \caption{Summary of technologies}
+    \label{table:techno_numbers}
+    \begin{tabular}{cccccc}
+        \toprule
+        \textbf{Technology} & \textbf{Bouygues} & \textbf{Free} & \textbf{Orange} & \textbf{SFR} & \textbf{Total} \\
+        \cmidrule(lr){1-6}
+        \textbf{2G} & 21710 & 0 & 18835 & 20093 & 60638 \\
+        \textbf{3G} & 26294 & 25934 & 29748 & 25777 & 107753 \\
+        \textbf{4G} & 26231 & 25847 & 30440 & 25881 & 108399 \\
+        \textbf{5G} & 11271 & 18607 & 8794 & 10968 & 49640 \\
+        \textbf{Total} & 26331 & 25949 & 30540 & 26018 & 108838 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
-    \begin{figure}[!t]
-        \centering
-        \boxed{\includegraphics[width=2.5in]{images/data_analysis/with_techno.png}}
-        \caption{Breakdown, by operator, of the number of sites containing a given technology}
-        \label{fig:data_technos}
-    \end{figure}
+\begin{figure}[!t]
+    \centering
+    \boxed{\includegraphics[width=2.5in]{images/data_analysis/with_techno.png}}
+    \caption{Breakdown, by operator, of the number of sites containing a given technology}
+    \label{fig:data_technos}
+\end{figure}
 
-    \begin{table}[!b]
-        \centering
-        \caption{Description of the dataset}
-        \label{table:data_columns}
-        \begin{tabular}{ll}
-            \toprule
-            \textbf{Column} & \textbf{Description} \\
-            \cmidrule(lr){1-2}
-            \textsl{id\_station\_anfr} & \acrshort{anfr} \acrshort{bs} ID \\ 
-            \textsl{nom\_op} & Name of the provider \\
-            \textsl{x, y, latitude, longitude} & Base station coordinates \\ 
-            \textsl{nom\_reg, nom\_dep, nom\_com} & Additional location information \\  
-            \textsl{site\_2g, 3g, 4g, 5g} & Technology used by the \acrshort{bs} \\ 
-            \bottomrule
-        \end{tabular}
-    \end{table}
+\begin{table}[!b]
+    \centering
+    \caption{Description of the dataset}
+    \label{table:data_columns}
+    \begin{tabular}{ll}
+        \toprule
+        \textbf{Column} & \textbf{Description} \\
+        \cmidrule(lr){1-2}
+        \textsl{id\_station\_anfr} & \acrshort{anfr} \acrshort{bs} ID \\ 
+        \textsl{nom\_op} & Name of the provider \\
+        \textsl{x, y, latitude, longitude} & Base station coordinates \\ 
+        \textsl{nom\_reg, nom\_dep, nom\_com} & Additional location information \\  
+        \textsl{site\_2g, 3g, 4g, 5g} & Technology used by the \acrshort{bs} \\ 
+        \bottomrule
+    \end{tabular}
+\end{table}
 
-    \subsection{Filtering the database}
-    As seen before this database is really huge, as a matter of fact we will only work on a portion of it.
+\subsection{Filtering the database}
+As seen before this database is really huge, as a matter of fact we will only work on a portion of it.
 
-    Firstly, only one provider will be kept because a \acrshort{bs} from provider $x$ can't be considered as a neighbour of \acrshort{bs} from provider $y$.
-    Consequently, we have chosen \emph{Orange} because it is the one that has the largest number of \acrshort{bs}.
+Firstly, only one provider will be kept because a \acrshort{bs} from provider $x$ can't be considered as a neighbour of \acrshort{bs} from provider $y$.
+Consequently, we have chosen \emph{Orange} because it is the one that has the largest number of \acrshort{bs}.
 
-    Secondly, for the same reasons as before, only one technology is kept. Thus, we kept all \acrshort{bs} using, at least, $4G$.
+Secondly, for the same reasons as before, only one technology is kept. Thus, we kept all \acrshort{bs} using, at least, $4G$.
 
 \section{Finding potential neighbours}
 \noindent When we are looking for neighbours, we need, at first, a list of potential neighbours for each \acrfull{bs}.
