@@ -178,33 +178,62 @@ Thus, we need to find methods to detetect and erase these bad connexions.
 The main innovation of our work compared to this one \cite{art_del_paq} is to take in account the difference of \acrshort{bs}'s density.
 
 \subsection{Measurement of \acrshort{bs} density}
-\noindent To make it easier to understand, and because it is related,
-we will assume that solving this problem is equivalent to finding the \acrshort{bs} situated in \og cities\fg{}.
+\noindent Places with a high population also have a high density of base stations. In fact, each base station can only support a certain
+load of users.
+
+Therefore, we can assume that finding zones with a high density of base station is equivalent to finding the \acrshort{bs} 
+situated in \og cities\fg{}.
 
 Moreover, to simplify the problem, each \acrshort{bs} will be classified in one of this four categories :
 \begin{itemize}
     \item \emph{city center};
     \item \emph{urban area};
     \item \emph{extra-urban area};
-    \item \emph{courntryside}.
+    \item \emph{countryside}.
 \end{itemize}
 
 \subsubsection{\acrshort{dbscan}}
-When thinking of density-based clustering, one of the first methods that comes in mind is probably \acrshort{dbscan}.
-It is really powerful because we only have two parameters to modify.
+The goal here is to separate points that seem to belong to a denser conglomerate of base station, from the others who are a bit more spaced
+to cover the countryside.
 
-Despite the efficiency of this method, it is not the best adapted to our problem because it's only giving us if a \acrshort{bs} is considered in a city or not.
-We wanted a more continuous method.
+That is called density based clustering. The main method to do that is \acrshort{dbscan}.
+
+It consists in detecting clusters based on the density, using two parameters :
+
+\begin{itemize}
+    \item \emph{$\epsilon$} : A distance threshold under which two points are considered close enough to be considered neighbours;   
+    \item \emph{$n_{\text{min}}$} : The shortest number of neigbours a points needs to have to be considered as a core point of a cluster.
+    
+\end{itemize}
+
+The clusters will then "grow" from the core points by attaching all points close from less than \emph{$epsilon$} than a point of the said 
+cluster.
+
+Despite the efficiency of this method, it is not the best adapted to our problem because it's only giving us if a \acrshort{bs} is considered 
+in a city or not, it doesn't split the points that are in a city into the four categories presented above.
 
 \subsubsection{\acrshort{hdbscan}}
+This method, introduced here \cite{10.1007/978-3-642-37456-2_14} is a variation of the \acrshort{dbscan} method. It consists
+in selecting the best clusters after testing their persistence by making the $\epsilon$ parameter vary. It's main particularity
+is that it allows to detect clusters of different densities.
+
+To each point who belong to a cluster is associated a probability that symbolises the degree of certainty for this point to belong
+to the said cluster.
+
+This probability can be used to separate the center of the city (where the probability is very high) from the rest of the city. However,
+it cannot be precise enough to separate the clusters into the four categories.
 
 \subsubsection{$3$-NN mean distance}
-To classify each base station we need a method.
+For our use case, we need a more specific method. Here is the explanation of how it works:
 
-For each base station the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma_i$, in $\unit{km}$), thus making it possible to classify each base station into four different categories listed in Table~\ref{table:crit_summary}.
+For each base station $i$, the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma_i$, in 
+$\unit{km}$). According to the value of $\gamma_i$, the base station can either be classified as part of one of the categroies of 
+Table~\ref{table:crit_summary} (very low value for city center, slighlty higher value for urban area,\dots).
 
-To make this method working properly, only \acrshort{bs} from one provider have to be kept into the calculation process.
-Moreover, this values are working well on France but it is not proven that it can work in another country. If someone uses this methods, values could be modified.
+To make this method work properly, only \acrshort{bs} from one provider have to be kept into the calculation process.
+
+Moreover, this values are working well on France but it is not proven that it can work in another country. If someone uses this methods, 
+values could be modified.
 
 \subsection{Filtering criteria}
 
@@ -219,7 +248,7 @@ Moreover, this values are working well on France but it is not proven that it ca
         city center & $\unit[2]{km}$ & $5^\circ$ \\
         urban area & $\unit[5]{km}$ & $10^\circ$ \\
         extra-urban area & $\unit[10]{km}$ & $15^\circ$ \\
-        courntryside & $\unit[15]{km}$ & $20^\circ$ \\
+        countryside & $\unit[15]{km}$ & $20^\circ$ \\
         \bottomrule
     \end{tabular}
 \end{table}
