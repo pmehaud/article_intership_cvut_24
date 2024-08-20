@@ -204,13 +204,6 @@ Let $p$, $q$, $r$ be three \acrshort{bs} of $P$, where $q$ and $r$ are $p$'s pot
 Therefore, the connexion between $p$ and $r$ needs to be suppressed. How? The angle $\widehat{qrp}$ is calculated and if it is narrower than a certain value, called \emph{min\_angle}, the longest edge is suppressed.
 
 \subsubsection{Quadrant criterion}
-\begin{figure}[!b]
-    \centering
-    \boxed{\includegraphics[width=2.5in]{images/illus_crit/quadrant_elim.png}}
-    \caption{Example of a Delaunay triangulation}
-    \label{fig:crit_qua}
-\end{figure}
-
 As introduced in a previous article \cite{10201211} its goal is to prevent all potential neighbours to be in the same angle range. Therefore, it was mainly thought to be used with the 
 $k$-NN potential neigbours method.
 
@@ -250,14 +243,6 @@ load of users.
 Therefore, we can assume that finding zones with a high density of base station is equivalent to finding the \acrshort{bs} 
 situated in \og cities\fg{}.
 
-Moreover, to simplify the problem, each \acrshort{bs} will be classified in one of this four categories:
-\begin{itemize}
-    \item \emph{city center};
-    \item \emph{urban area};
-    \item \emph{extra-urban area};
-    \item \emph{countryside}.
-\end{itemize}
-
 \subsubsection{\acrshort{dbscan}}
 DBScan gives only two categories : city - countryside
 [permet de faire que 2 categories : pas assez précis (mais ptet à mettre dans résultats)]
@@ -267,22 +252,19 @@ DBScan gives only two categories : city - countryside
 ...
 
 \subsubsection{$3$-NN mean distance}
-For our use case, we need a more specific method. Here is the explanation of how it works:
-
 For each base station $i$, the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma_i$, in 
-$\unit{km}$). According to the value of $\gamma_i$, the base station can either be classified as part of one of the categroies of 
-Table~\ref{table:crit_summary} (very low value for city center, slighlty higher value for urban area, \dots).
-
-To make this method work properly, only \acrshort{bs} from one provider have to be kept into the calculation process.
-
-Moreover, this values are working well on France but it is not proven that it can work in another country. If someone uses this methods, 
-values could be modified [dire que c'est plutot qqch à faire dans le futur et pas que c'est pas vérifié].
-
-[Rajouter les catégories]
+$\unit{km}$). According to the value of $\gamma_i$, the base station can either be classified into one of these categories:
+\begin{itemize}
+    \item city center: $\gamma_i\in [0,1]$;
+    \item urban area: $\gamma_i\in ]1,2]$;
+    \item extra-urban: $\gamma_i\in ]2,4]$;
+    \item countryside: $\gamma_i\in ]4,\infty[$.
+\end{itemize}
+If you want this method to work properly, only \acrshort{bs} from the same provider have to be kept into the calculation process.
+Althought this values are working well on France, we haven't tried yet on another country.
 
 \subsection{Improvement of filtering criteria}
-
-\begin{table}[!b]
+\begin{table}[!t]
     \centering
     \caption{Summary of criteria values}
     \label{table:crit_summary}
@@ -298,62 +280,32 @@ values could be modified [dire que c'est plutot qqch à faire dans le futur et p
     \end{tabular}
 \end{table}
 
-\begin{figure}[!t]
-    \centering
-    \boxed{\includegraphics[width=2.5in]{images/illus_crit/points.png}}
-    \caption{Example of a Delaunay triangulation}
-    \label{fig:crit_pts}
-\end{figure}
+\subsubsection{Distance and angle criterion}
+As seen in section~\ref{sec:reminder}, after having found potential neighbours for each base station,
+we need to filtrate this connexions. However, this applies the same distance and angle threshold for all base stations, without taking in account the difference of density.
 
-\begin{figure}[!b]
-    \centering
-    \boxed{\includegraphics[width=2.5in]{images/illus_crit/distance_elim.png}}
-    \caption{Example of a Delaunay triangulation}
-    \label{fig:crit_dis}
-\end{figure}
+The method we propose now is to take in account those differences of density for each site to apply a different thresholdn according to the category the site in classified in.
 
-\begin{figure}[!t]
-    \centering
-    \boxed{\includegraphics[width=2.5in]{images/illus_crit/angle_elim.png}}
-    \caption{Example of a Delaunay triangulation}
-    \label{fig:crit_ang}
-\end{figure}
-
-\begin{figure}[!t]
-    \centering
-    \boxed{\includegraphics[width=2.5in]{images/illus_crit/neighs.png}}
-    \caption{Example of a Delaunay triangulation}
-    \label{fig:crit_nei}
-\end{figure}
-
-\subsubsection{Distance criterion}
-When looking at the results of Delaunay triangulation, we realise that some edges, mostly on the border of $P$ are too long.
-
-Indeed, a \acrshort{bs} does not have an infinite coverage area. As a consequence, for each \acrshort{bs} the neighbouring connexions that are longer than a certain value, called \emph{max\_distance} (cf. Table~\ref{table:crit_summary}), are suppressed.
-
-\subsubsection{Angle criterion}
-Let $p$, $q$, $r$ be three \acrshort{bs} of $P$, where $q$ and $r$ are $p$'s potential neighbours. As said before, coverage areas of \acrshort{bs} are limited by physics, this also implies that $r$ can be \og hidden\fg{} from $p$ by $q$ because $q$ is between $p$ and $r$ [trouver qqch pour prouver ce que je dis].
-
-Therefore, the connexion between $p$ and $r$ needs to be suppressed. How? The angle $\widehat{qrp}$ is calculated and if it is narrower than a certain value, called \emph{min\_angle} (cf. Table~\ref{table:crit_summary}), the longest edge is suppressed.
-
-[Dire que c'est des angles adjacents]
+You can find those values listed in Table~\ref{table:crit_summary}.
 
 \subsubsection{Quadrant criterion}
-As introduced in a previous article \cite{10201211} its goal is to prevent all potential neighbours to be in the same angle range. Therefore, it was mainly thought to be used with the 
-$k$-NN potential neigbours method.
-
-It consists in dividing the space around each base station into quadrants and keeping only a certain number of potential neighbours
-in each of the quadrants. The number of quadrants has been fixed to six \cite{art_del_paq}.
-
-The criterion has been upgraded by adding the possibility to rotate the quadrants. The offset angle selected, which is between $0$ and 
+This criterion has been upgraded by adding the possibility to rotate the quadrants. The offset angle selected, which is between $0$ and 
 $60$ degrees, is the one that maximises the sum of the distances of the potential neighbours to their closest quadrant delimitation.
 
 In other words, it tends to select the angle with which the potential neighbors are as much in the middle of their respective quadrants
 as possible.
 
 The quadrant criterion is illustrated in Fig~\ref{fig:crit_qua}.
+\begin{figure}[!t]
+    \centering
+    \boxed{\includegraphics[width=2.5in]{images/illus_crit/quadrant_elim.png}}
+    \caption{Illustation of the rotated quadrant criterion}
+    \label{fig:crit_qua}
+\end{figure}
 
 \section{Results}
+
+\subsection{Measurement of \acrshort{bs} density}
 
 \subsection{Combining criteria}
 As a matter of optimisation, criteria are applied one after another. For example, the base graph is Delaunay triangulation and we apply distance then angle.
@@ -362,6 +314,8 @@ The principle is that angle criterion will be applied on the Delaunay graph filt
 As a consequence, results differ according to the order in which the criteria are applied.
 
 The best is Delaunay with distance and then angle.
+
+
 
 \section{Conclusion}
 
