@@ -90,11 +90,16 @@ brendan.sevellec@insa-rouen.fr}}
 them is directly necessary to the method itself.
 
 \subsection{Main database}
-This database \cite{main_database} contains all the information needed to the application of the method. It is from
+This database \cite{main_database} contains all the information needed for the application of the method. It is from
 \acrfull{arcep}, which is an independent French administrative authority responsible for regulating electronic and postal communications and press distribution.
 
-The fields that are being used here are described in Table~\ref{table:data_columns}. [expliquer qu'il y x colonnes mais qu'on utilise que elles]
-\begin{table}[!b]
+This database was first published for the third quarter of 2017 and the version we are using was published on 28\textsuperscript{th} March 2024 \cite{main_database_hist}.
+It's updated for every quarter. For instance, the data we used refers to the fourth quarter of 2023.
+
+It consists of a substantial collection of $108\,838$ entries, encompassing 29 distinct features of a size of $\unit[16.7]{Mo}$.
+Each row of the database corresponds to detailed information regarding a specific BS. For the scope of this study,
+our analysis will focus on the fields outlined in Table~\ref{table:data_columns}.
+\begin{table}
     \centering
     \caption{Description of the main database columns used in the experiments}
     \label{table:data_columns}
@@ -104,20 +109,37 @@ The fields that are being used here are described in Table~\ref{table:data_colum
         \cmidrule(lr){1-2}
         \textsl{id\_station\_anfr} & \acrshort{anfr} \acrshort{bs} ID \\ 
         \textsl{nom\_op} & Name of the provider \\
-        \textsl{x, y, latitude, longitude} & Base station coordinates \\ 
+        \textsl{$x$, $y$, latitude, longitude} & Base station coordinates \\ 
         \textsl{nom\_reg, nom\_dep, nom\_com} & Additional location information \\  
         \textsl{site\_2g, 3g, 4g, 5g} & Technology used by the \acrshort{bs} \\ 
         \bottomrule
     \end{tabular}
 \end{table}
 
-This database is updated every quarter. For instance, the own we used was published on 28\textsuperscript{th} March 2024 \cite{main_database_hist}. [dire depuis quand la base existe]
+For station coordinates, we will use two different reference points: $x$ and $y$ coordinates, which are Lambert-93 projections of latitude and longitude.
+This dual system has two advantages: the $x$, $y$ coordinates allow us to calculate distances in meters using the Euclidean norm,
+which is more efficient in terms of calculation, and the GPS coordinates make it easier to display the points on a map.
 
-On the site there is a chat where we can ask questions about the databases \cite{main_database_chat}.
+In addition, we can find in the columns the name of the provider (\textsl{nom\_op}). In this database, only the four main french providers are represented:
+\emph{Bouygues Telecom}, \emph{Free Mobile}, \emph{Orange} and \emph{SFR}.
 
-[parler des technologies, rajouter des graphes]
-
-\begin{table}[!t]
+Finally, we have informations about the technologies used in every site. Indeed, a site can use multiple technologies.
+In Figure~\ref{fig:data_evolution} you will find the evolution of each technology from the first updates of the data.
+\begin{figure}
+    \centering
+    \boxed{\includegraphics[width=2.5in]{images/data_analysis/technos-evolution.png}}
+    \caption{Evolution by quarter year and by technology of the number of \acrshort{bs}}
+    \label{fig:data_evolution}
+\end{figure}
+Then, in Figure~\ref{fig:data_technos} you will find a chart showing the number of times each technology is present for each provider.
+\begin{figure}
+    \centering
+    \boxed{\includegraphics[width=2.5in]{images/data_analysis/with_techno.png}}
+    \caption{Breakdown, by operator, of the number of sites containing a given technology}
+    \label{fig:data_technos}
+\end{figure}
+We can see, for example, that \emph{Free Mobile} doesn't have any base station with $2$G technology. Additionally, you can als find these values in Table~\ref{table:techno_numbers}.
+\begin{table}
     \centering
     \caption{Number of \acrfull{bs} equipped, at least, with $x$G, by provider}
     \label{table:techno_numbers}
@@ -134,13 +156,6 @@ On the site there is a chat where we can ask questions about the databases \cite
     \end{tabular}
 \end{table}
 
-\begin{figure}[!b]
-    \centering
-    \boxed{\includegraphics[width=2.5in]{images/data_analysis/with_techno.png}}
-    \caption{Breakdown, by operator, of the number of sites containing a given technology}
-    \label{fig:data_technos}
-\end{figure}
-
 \subsection{Filtering the database}
 As seen before this database is really huge, as a matter of fact we will only work on a portion of it.
 
@@ -149,7 +164,9 @@ Consequently, we have chosen \emph{Orange} because it is the one that has the la
 
 Secondly, for the same reasons as before, only one technology is kept. Thus, we kept all \acrshort{bs} using, at least, 4G.
 
-Finally, in order to simplify viewing, we will apply our neighbouring only on the Normandie region just because this is where we live.
+In order to simplify the calculation times, the vision and the assessment of the quality of the results, we will only work on sites located in the Normandy region.
+This is because Normandy is where our school is based, giving us a better view of its geography.
+
 \section{Reminder on existing methods\label{sec:reminder}}
 \subsection{Finding potential neighbours}
 When we are looking for neighbours, we need, at first, a list of potential neighbours for each point.
@@ -172,7 +189,7 @@ It is a well-known method when trying to find neighbours \cite{delaunay_neighbor
 since a Delaunay triangulation is the pendant of a Voronoi diagram, cf. Figure~\ref{fig:del_tri}, i.e. two points are connected in the
 Delaunay triangulation if their associated cells are touching each other in the Voronoi diagram.
 
-\begin{figure}[!b]
+\begin{figure}
     \centering
     \boxed{\includegraphics[width=1.25in]{images/illus_graphs/Delaunay_circumcircles_vectorial.png}}
     \boxed{\includegraphics[width=1.25in]{images/illus_graphs/Delaunay_Voronoi.png}}
@@ -249,18 +266,20 @@ DBScan gives only two categories : city - countryside
 
 \subsubsection{$3$-NN mean distance}
 For each base station $i$, the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma_i$, in 
-$\unit{km}$). According to the value of $\gamma_i$, the base station can either be classified into one of these categories:
-\begin{itemize}
-    \item city center: $\gamma_i\in [0,1]$;
-    \item urban area: $\gamma_i\in ]1,2]$;
-    \item extra-urban: $\gamma_i\in ]2,4]$;
-    \item countryside: $\gamma_i\in ]4,\infty[$.
-\end{itemize}
+$\unit{km}$). According to the value of $\gamma_i$, the base station will be classified into a different category.
+
 If you want this method to work properly, only \acrshort{bs} from the same provider have to be kept into the calculation process.
 Althought this values are working well on France, we haven't tried yet on another country.
 
+% \begin{itemize}
+%     \item city center: $\gamma_i\in [0,1]$;
+%     \item urban area: $\gamma_i\in ]1,2]$;
+%     \item extra-urban: $\gamma_i\in ]2,4]$;
+%     \item countryside: $\gamma_i\in ]4,\infty[$.
+% \end{itemize}
+
 \subsection{Improvement of filtering criteria}
-\begin{table}[!t]
+\begin{table}
     \centering
     \caption{Summary of criteria values}
     \label{table:crit_summary}
@@ -280,9 +299,9 @@ Althought this values are working well on France, we haven't tried yet on anothe
 As seen in section~\ref{sec:reminder}, after having found potential neighbours for each base station,
 we need to filtrate this connexions. However, this applies the same distance and angle threshold for all base stations, without taking in account the difference of density.
 
-The method we propose now is to take in account those differences of density for each site to apply a different thresholdn according to the category the site in classified in.
+The method we propose now is to take in account those differences of density for each site to apply a different threshold according to the category the site in classified in.
 
-You can find those values listed in Table~\ref{table:crit_summary}.
+For both distance and angle, the more the base station is in a dense category, the lower this threshold will be.
 
 \subsubsection{Quadrant criterion}
 This criterion has been upgraded by adding the possibility to rotate the quadrants. The offset angle selected, which is between $0$ and 
@@ -292,7 +311,7 @@ In other words, it tends to select the angle with which the potential neighbors 
 as possible.
 
 The quadrant criterion is illustrated in Fig~\ref{fig:crit_qua}.
-\begin{figure}[!t]
+\begin{figure}
     \centering
     \boxed{\includegraphics[width=2.5in]{images/illus_crit/quadrant_elim.png}}
     \caption{Illustation of the rotated quadrant criterion}
