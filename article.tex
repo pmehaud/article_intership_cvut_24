@@ -86,7 +86,7 @@ brendan.sevellec@insa-rouen.fr}}
 \section{Related works}
 
 \section{Databases}
-Several databases have been used in order to test the different aspects of the methods. However, one of
+\noindent Several databases have been used in order to test the different aspects of the methods. However, one of
 them is directly necessary to the method itself.
 
 \subsection{Main database}
@@ -94,37 +94,6 @@ This database \cite{main_database} contains all the information needed to the ap
 \acrfull{arcep}, which is an independent French administrative authority responsible for regulating electronic and postal communications and press distribution.
 
 The fields that are being used here are described in Table~\ref{table:data_columns}. [expliquer qu'il y x colonnes mais qu'on utilise que elles]
-
-This database is updated every quarter. For instance, the own we used was published on 28\textsuperscript{th} March 2024 \cite{main_database_hist}. [dire depuis quand la base existe]
-
-On the site there is a chat where we can ask questions about the databases \cite{main_database_chat}.
-
-[parler des technologies, rajouter des graphes]
-
-\begin{table}[!b]
-    \centering
-    \caption{Number of \acrfull{bs} equipped, at least, with $x$G, by provider}
-    \label{table:techno_numbers}
-    \begin{tabular}{cccccc}
-        \toprule
-        \textbf{Technology} & \textbf{Bouygues} & \textbf{Free} & \textbf{Orange} & \textbf{SFR} & \textbf{Total} \\
-        \cmidrule(lr){1-6}
-        \textbf{2G} & 21710 & 0 & 18835 & 20093 & 60638 \\
-        \textbf{3G} & 26294 & 25934 & 29748 & 25777 & 107753 \\
-        \textbf{4G} & 26231 & 25847 & 30440 & 25881 & 108399 \\
-        \textbf{5G} & 11271 & 18607 & 8794 & 10968 & 49640 \\
-        \textbf{Total} & 26331 & 25949 & 30540 & 26018 & 108838 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-\begin{figure}[!t]
-    \centering
-    \boxed{\includegraphics[width=2.5in]{images/data_analysis/with_techno.png}}
-    \caption{Breakdown, by operator, of the number of sites containing a given technology}
-    \label{fig:data_technos}
-\end{figure}
-
 \begin{table}[!b]
     \centering
     \caption{Description of the main database columns used in the experiments}
@@ -142,6 +111,36 @@ On the site there is a chat where we can ask questions about the databases \cite
     \end{tabular}
 \end{table}
 
+This database is updated every quarter. For instance, the own we used was published on 28\textsuperscript{th} March 2024 \cite{main_database_hist}. [dire depuis quand la base existe]
+
+On the site there is a chat where we can ask questions about the databases \cite{main_database_chat}.
+
+[parler des technologies, rajouter des graphes]
+
+\begin{table}[!t]
+    \centering
+    \caption{Number of \acrfull{bs} equipped, at least, with $x$G, by provider}
+    \label{table:techno_numbers}
+    \begin{tabular}{cccccc}
+        \toprule
+        \textbf{Technology} & \textbf{Bouygues} & \textbf{Free} & \textbf{Orange} & \textbf{SFR} & \textbf{Total} \\
+        \cmidrule(lr){1-6}
+        \textbf{2G} & 21710 & 0 & 18835 & 20093 & 60638 \\
+        \textbf{3G} & 26294 & 25934 & 29748 & 25777 & 107753 \\
+        \textbf{4G} & 26231 & 25847 & 30440 & 25881 & 108399 \\
+        \textbf{5G} & 11271 & 18607 & 8794 & 10968 & 49640 \\
+        \textbf{Total} & 26331 & 25949 & 30540 & 26018 & 108838 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{figure}[!b]
+    \centering
+    \boxed{\includegraphics[width=2.5in]{images/data_analysis/with_techno.png}}
+    \caption{Breakdown, by operator, of the number of sites containing a given technology}
+    \label{fig:data_technos}
+\end{figure}
+
 \subsection{Filtering the database}
 As seen before this database is really huge, as a matter of fact we will only work on a portion of it.
 
@@ -153,7 +152,7 @@ Secondly, for the same reasons as before, only one technology is kept. Thus, we 
 Finally, in order to simplify viewing, we will apply our neighbouring only on the Normandie region just because this is where we live.
 \section{Reminder on existing methods}
 \subsection{Finding potential neighbours}
-\noindent When we are looking for neighbours, we need, at first, a list of potential neighbours for each point.
+When we are looking for neighbours, we need, at first, a list of potential neighbours for each point.
 For that, we will construct a neigbouring graph $G = (P, U)$ where $P$ is the set of all points and each edge in $U$ represents a neighbouring relation.
 
 \subsubsection{$k$-NN graph}
@@ -173,7 +172,7 @@ It is a well-known method when trying to find neighbours \cite{delaunay_neighbor
 since a Delaunay triangulation is the pendant of a Voronoi diagram, cf. Figure~\ref{fig:del_tri}, i.e. two points are connected in the
 Delaunay triangulation if their associated cells are touching each other in the Voronoi diagram.
 
-\begin{figure}[!t]
+\begin{figure}[!b]
     \centering
     \boxed{\includegraphics[width=1.25in]{images/illus_graphs/Delaunay_circumcircles_vectorial.png}}
     \boxed{\includegraphics[width=1.25in]{images/illus_graphs/Delaunay_Voronoi.png}}
@@ -189,7 +188,7 @@ Formally, it is the graph in which any two distinct points $p, q \in P$ are adja
 Basically, the interset of this method, compared to the Delaunay triangulation, is that it is adding a first level of filtration to suppress some neighbouring connexions.
 
 \subsection{Finding real neighbours}
-\noindent For the purpose of our experiments, i.e. finding \acrshort{bs} neighbours, the previously presented methods are not sufficient to find real neighbours.
+For the purpose of our experiments, i.e. finding \acrshort{bs} neighbours, the previously presented methods are not sufficient to find real neighbours.
 As a consequence, some neighbouring connexions needs to be suppressed \cite{patent_neighs}.
 \subsubsection{Distance criterion\cite{patent_neighs}}
 A \acrshort{bs} does not have an infinite coverage area.
@@ -216,7 +215,7 @@ in each of the quadrants, cf. Figure~\ref{fig:crit_qua}.
 The number of quadrants has been fixed to six \cite{art_del_paq}.
 
 \subsection{Density-based clustering methods}
-\noindent Although the filtering methods are providing good results, it is still not enough.
+Although the filtering methods are providing good results, it is still not enough.
 Therefore, we will modify those criteria to take in account the variations of \acrshort{bs} density. Thus, we need some measurement of this density.
 
 As those problems are equivalent and because this is simpler to visualise, we will say that we are looking for detecting the cities.
@@ -247,7 +246,7 @@ Thus, we need to find methods to detetect and erase these bad connexions.
 The main innovation of our work compared to this one \cite{art_del_paq} is to take in account the difference of \acrshort{bs}'s density.
 
 \subsection{Measurement of \acrshort{bs} density}
-\noindent Places with a high population also have a high density of base stations. In fact, each base station can only support a certain
+Places with a high population also have a high density of base stations. In fact, each base station can only support a certain
 load of users.
 
 Therefore, we can assume that finding zones with a high density of base station is equivalent to finding the \acrshort{bs} 
