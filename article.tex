@@ -66,23 +66,26 @@ brendan.sevellec@insa-rouen.fr}}
 \maketitle
 
 \begin{abstract}
-  The field of telecommunication represents a gigantic mine of information, the smartphone penetration rate being 69\%
-  in 2023 in the world, and 97\% in France. Therefore, the collected datas represent a big opportunity for telecommunication
-  companies to predict their customers behaviour for internal or marketing purposes. Thus, it is primordial for these companies
-  to be able to determinate if a user is moving. For that, it is necessary to understand the neighbouring relationships between the 
-  telephonic base stations. This article aims at comparing different method, ellaborated in order to adaptively detect these
-  relationship between telephonic base stations given their geographical positions.
+    The field of telecommunication represents a gigantic mine of information, the smartphone penetration rate being 69\%
+    in 2023 in the world, and 97\% in France. Therefore, the collected datas represent a big opportunity for telecommunication
+    companies to predict their customers behaviour for internal or marketing purposes. Thus, it is primordial for these companies
+    to be able to determine if a user is moving. For that, it is necessary to understand the neighbouring relationships between the 
+    telephonic base stations. This article aims at proposing and comparing different method, that aim at adaptively detect these
+    relationship between telephonic base stations. Therefore, it proposes a new method to create a neighbouring graph of base
+    stations via their geographical positions.
 \end{abstract}
 
 \section{Introduction}
-    \IEEEPARstart{T}{his} article is the continuation of the work done by Delphine Paquiry in this paper \cite{art_del_paq}.
-    It aims at discovering the neighbouring relationships between base stations from their geographical positions, using a 
-    measure of the density of base station.
+    \IEEEPARstart{T}{his} article articulates around the themes of mobile networks and neighbouring problems. 
 
-    For that, it is necessary to describe and analyse the databases that have been used during the research, then to present 
-    the different approaches that always consist of these steps: establish a first neighbouring graph, compute the base station 
-    densities and filter this graph with different criteria using this information. The final step is to present the results
-    of the different approaches and conclude.
+    A cellular network, also know as a mobile network, is a type of telecommunications network that is dispersed over geographical areas known 
+    as cells, each of which is supplied by at least one fixed-location transceiver called base station. These base stations give the cell network
+    coverage so that voice, data, and other kinds of content may be transmitted.
+    
+    Given a list of points and their coordinates, a neighbouring problem consists in finding, for each point, a list of other points that are 
+    considered as its neighbours.
+
+    
 \section{Related works}
 
 \section{Databases}
@@ -91,7 +94,8 @@ them is directly necessary to the method itself.
 
 \subsection{Main database}
 This database \cite{main_database} contains all the information needed for the application of the method. It is from
-\acrfull{arcep}, which is an independent French administrative authority responsible for regulating electronic and postal communications and press distribution.
+\acrfull{arcep}, which is an independent French administrative authority responsible for regulating electronic and postal 
+communications and press distribution.
 
 This database was first published for the third quarter of 2017 and the version we are using was published on 28\textsuperscript{th} March 2024 \cite{main_database_hist}.
 It's updated for every quarter. For instance, the data we used refers to the fourth quarter of 2023.
