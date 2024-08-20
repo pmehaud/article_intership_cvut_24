@@ -215,10 +215,6 @@ in each of the quadrants, cf. Figure~\ref{fig:crit_qua}.
 The number of quadrants has been fixed to six \cite{art_del_paq}.
 
 \subsection{Density-based clustering methods}
-Although the filtering methods are providing good results, it is still not enough.
-Therefore, we will modify those criteria to take in account the variations of \acrshort{bs} density. Thus, we need some measurement of this density.
-
-As those problems are equivalent and because this is simpler to visualise, we will say that we are looking for detecting the cities.
 \subsubsection{\acrshort{dbscan}}
 \acrshort{dbscan} consists in detecting clusters based on the density of points, using two parameters:
 \begin{itemize}
@@ -237,8 +233,9 @@ is that it allows to detect clusters of different densities.
 To each point who belongs to a cluster is associated a probability that symbolises the degree of certainty for this point to belong
 to the said cluster.
 
-\section{Finding the real neighbours}
-\noindent Each of the precedent methods gives us a list of potential neighbours for each \acrshort{bs}. However, we know that some of this neighbouring connexions are wrong,
+\section{Contributions}
+\noindent Each of the precedent methods gives us a list of potential neighbours for each \acrshort{bs}.
+However, we know that some of this neighbouring connexions are wrong,
 either because of the neighboring graph construction method or physical specificities linked to the base stations themselves.
 
 Thus, we need to find methods to detetect and erase these bad connexions.
