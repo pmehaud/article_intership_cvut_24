@@ -246,14 +246,6 @@ load of users.
 Therefore, we can assume that finding zones with a high density of base station is equivalent to finding the \acrshort{bs} 
 situated in \og cities\fg{}.
 
-Moreover, to simplify the problem, each \acrshort{bs} will be classified in one of this four categories:
-\begin{itemize}
-    \item \emph{city center};
-    \item \emph{urban area};
-    \item \emph{extra-urban area};
-    \item \emph{countryside}.
-\end{itemize}
-
 \subsubsection{\acrshort{dbscan}}
 DBScan gives only two categories : city - countryside
 [permet de faire que 2 categories : pas assez précis (mais ptet à mettre dans résultats)]
@@ -263,18 +255,19 @@ DBScan gives only two categories : city - countryside
 ...
 
 \subsubsection{$3$-NN mean distance}
-For our use case, we need a more specific method. Here is the explanation of how it works:
-
 For each base station $i$, the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma_i$, in 
 $\unit{km}$). According to the value of $\gamma_i$, the base station can either be classified as part of one of the categroies of 
-Table~\ref{table:crit_summary} (very low value for city center, slighlty higher value for urban area, \dots).
+Table~\ref{table:crit_summary}:
+\begin{itemize}
+    \item city center: $\gamma_i\in [0,1]$;
+    \item urban area: $\gamma_i\in ]1,2]$;
+    \item extra-urban: $\gamma_i\in ]2,4]$;
+    \item countryside: $\gamma_i\in ]4,\infty[$.
+\end{itemize}
 
-To make this method work properly, only \acrshort{bs} from one provider have to be kept into the calculation process.
+To make this method work properly, only \acrshort{bs} from the same provider have to be kept into the calculation process.
 
-Moreover, this values are working well on France but it is not proven that it can work in another country. If someone uses this methods, 
-values could be modified [dire que c'est plutot qqch à faire dans le futur et pas que c'est pas vérifié].
-
-[Rajouter les catégories]
+Althought, this values are working well on France, we haven't tried yet on another country.
 
 \subsection{Improvement of filtering criteria}
 
@@ -351,6 +344,8 @@ The quadrant criterion is illustrated in Fig~\ref{fig:crit_qua}.
 
 \section{Results}
 
+\subsection{Measurement of \acrshort{bs} density}
+
 \subsection{Combining criteria}
 As a matter of optimisation, criteria are applied one after another. For example, the base graph is Delaunay triangulation and we apply distance then angle.
 The principle is that angle criterion will be applied on the Delaunay graph filtered with the distance criterion.
@@ -358,6 +353,8 @@ The principle is that angle criterion will be applied on the Delaunay graph filt
 As a consequence, results differ according to the order in which the criteria are applied.
 
 The best is Delaunay with distance and then angle.
+
+
 
 \section{Conclusion}
 
