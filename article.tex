@@ -24,7 +24,7 @@
 
 \global\long\def\BDsites{\textsf{BD\_sites}}
 
-\title{Adaptative neigbouring methods applied to telephonic base stations}
+\title{Adaptative neighbouring methods applied to telephonic base stations}
 \author{\IEEEauthorblockN{Paul MÉHAUD}\\
 \IEEEauthorblockA{\textit{Intern at CTU in Prague} \\
 \textit{INSA Rouen Normandie}\\
@@ -164,7 +164,7 @@ brendan.sevellec@insa-rouen.fr}}
 \section{Reminder on existing methods\label{sec:reminder}}
     \subsection{Finding potential neighbours}
         When we are looking for neighbours, we need, at first, a list of potential neighbours for each point.
-        For that, we will construct a neigbouring graph $G = (P, U)$ where $P$ is the set of all points and each edge in $U$ represents a neighbouring relation.
+        For that, we will construct a neighbouring graph $G = (P, U)$ where $P$ is the set of all points and each edge in $U$ represents a neighbouring relation.
 
         \subsubsection{$k$-NN graph}
             The most intuitive method is to connect each point to its $k$ nearest neighbours, where $k \in \mathbb{N}^*$ is a parameter to be fixed. 
@@ -207,7 +207,7 @@ brendan.sevellec@insa-rouen.fr}}
             Therefore, the connexion between $p$ and $r$ needs to be suppressed. How? The angle $\widehat{qrp}$ is calculated and if it is narrower than a certain value, called \emph{min\_angle}, the longest edge is suppressed.
 
         \subsubsection{Quadrant criterion}
-            As introduced in a previous article \cite{10201211} its goal is to prevent all potential neighbours to be in the same angle range. Therefore, it was mainly thought to be used with the $k$-NN potential neigbours method.
+            As introduced in a previous article \cite{10201211} its goal is to prevent all potential neighbours to be in the same angle range. Therefore, it was mainly thought to be used with the $k$-NN potential neighbours method.
 
             It consists in dividing the space around each base station into quadrants and keeping only a certain number of potential neighbours in each of the quadrants, cf. Figure~\ref{fig:crit_qua}.
             The number of quadrants has been fixed to six \cite{art_del_paq}.
@@ -217,7 +217,7 @@ brendan.sevellec@insa-rouen.fr}}
             \acrshort{dbscan} consists in detecting clusters based on the density of points, using two parameters:
             \begin{itemize}
                 \item \emph{$\varepsilon$}: A distance threshold under which two points are considered close enough to be considered neighbours;   
-                \item \emph{$n_{\text{min}}$}: The shortest number of neigbours a points needs to have to be considered as a core point of a cluster.
+                \item \emph{$n_{\text{min}}$}: The shortest number of neighbours a points needs to have to be considered as a core point of a cluster.
             \end{itemize}
 
             The clusters will then \og grow\fg{} from the core points by attaching all points close from less than \emph{$\varepsilon$} than a point of the said cluster.
@@ -285,7 +285,7 @@ brendan.sevellec@insa-rouen.fr}}
         \subsubsection{Quadrant criterion}
             This criterion has been upgraded by adding the possibility to rotate the quadrants. The offset angle selected, which is between $0$ and $60$ degrees, is the one that maximises the sum of the distances of the potential neighbours to their closest quadrant delimitation.
 
-            In other words, it tends to select the angle with which the potential neighbors are as much in the middle of their respective quadrants as possible.
+            In other words, it tends to select the angle with which the potential neighbours are as much in the middle of their respective quadrants as possible.
 
             The quadrant criterion is illustrated in Fig~\ref{fig:crit_qua}.
             \begin{figure}
@@ -296,7 +296,6 @@ brendan.sevellec@insa-rouen.fr}}
             \end{figure}
 
 \section{Results}
-
     \subsection{Measurement of \acrshort{bs} density}
 
     \subsection{Combining criteria}
@@ -306,8 +305,6 @@ brendan.sevellec@insa-rouen.fr}}
         As a consequence, results differ according to the order in which the criteria are applied.
 
         The best is Delaunay with distance and then angle.
-
-
 
 \section{Conclusion}
     [Ouverture: prendre en compte les zazimuths]
@@ -319,5 +316,3 @@ brendan.sevellec@insa-rouen.fr}}
 \bibliography{./biblio.bib}
 
 \end{document}
-
-
