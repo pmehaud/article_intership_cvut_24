@@ -89,18 +89,24 @@ brendan.sevellec@insa-rouen.fr}}
 
     In any case, these generic methods aren't perfectly adapted to this application as real base stations are submitted to specific limitations.
 
-    Therefore, some researchs were done in order to adapt these methods to this specific application. \cite{patent_neighs}
+    Therefore, some researchs were done in order to adapt these methods to this specific application \cite{patent_neighs}.
 
     This article aims at enhance the precision of these methods by taking into account the density of base station. It also aims at comparing the efficiency of different approaches. 
 
-    Therefore, the outcome of the method presented will be a neighbouring graph where each node is a base station and each edge represent a neighbouring relationship between these two base stations. In [insert citation], you can see an example of neighbouring graph.
+    Therefore, the outcome of the method presented will be a neighbouring graph, cf. Figure~\ref{fig:neigh_graph}, where each node is a base station and each edge represent a neighbouring relationship between these two base stations.
+    \begin{figure}
+        \centering
+        \boxed{\includegraphics[width=2.5in]{images/illus_graphs/neighbouring_graph.png}}
+        \caption{Illustration of a neighbouring graph}
+        \label{fig:neigh_graph}
+    \end{figure}
 
-    The rest of the paper is organized as follows: Section II reviews the related works relevant to our research, providing a foundation by discussing prior studies and their limitations. In Section III, we detail the databases used in our analysis, including data sources, update frequency, and key characteristics. Section IV offers a reminder on existing methods, summarizing the methodologies previously applied to similar problems and setting the stage for our proposed approach. Section V outlines our contributions, emphasizing the novel aspects of our work and how it advances the field. In Section VI, we present the results, analyzing the performance and implications of our proposed methods. Finally, Section VII concludes the paper, summarizing key findings and suggesting directions for future research.
+    The rest of the paper is organized as follows: Section~\ref{sec:rel_works} reviews the related works relevant to our research, providing a foundation by discussing prior studies and their limitations. In Section~\ref{sec:data}, we detail the databases used in our analysis, including data sources, update frequency, and key characteristics. Section~\ref{sec:reminder} offers a reminder on existing methods, summarizing the methodologies previously applied to similar problems and setting the stage for our proposed approach. Section~\ref{sec:contrib} outlines our contributions, emphasizing the novel aspects of our work and how it advances the field. In Section~\ref{sec:res}, we present the results, analyzing the performance and implications of our proposed methods. Finally, Section~\ref{sec:ccl} concludes the paper, summarizing key findings and suggesting directions for future research.
 
-\section{Related works}
+\section{Related works\label{sec:rel_works}}
     \noindent
 
-\section{Databases}
+\section{Databases\label{sec:data}}
     \noindent Several databases have been used in order to test the different aspects of the methods. However, one of them is directly necessary to the method itself.
 
     \subsection{Main database}
@@ -249,7 +255,7 @@ brendan.sevellec@insa-rouen.fr}}
 
             To each point who belongs to a cluster is associated a probability that symbolises the degree of certainty for this point to belong to the said cluster.
 
-\section{Contributions}
+\section{Contributions\label{sec:contrib}}
     \noindent In section~\ref{sec:reminder}, we have seen that we can find the neighbours of base stations by combining a potential neighbouring graph and filtration criteria. This methodology gives pretty good results \cite{art_del_paq}.
 
     However, in certain cases like in a city, the filtration criteria aren't precise enough. We, therefore, need to find some ways to measure base stations' density.
@@ -316,7 +322,7 @@ brendan.sevellec@insa-rouen.fr}}
                 \label{fig:crit_qua}
             \end{figure}
 
-\section{Results}
+\section{Results\label{sec:res}}
     \subsection{Measurement of \acrshort{bs} density}
 
     \subsection{Combining criteria}
@@ -327,7 +333,7 @@ brendan.sevellec@insa-rouen.fr}}
 
         The best is Delaunay with distance and then angle.
 
-\section{Conclusion}
+\section{Conclusion\label{sec:ccl}}
     [Ouverture: prendre en compte les zazimuths]
 
 \printglossary[type=\acronymtype]
