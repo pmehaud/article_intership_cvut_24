@@ -160,7 +160,7 @@ We can see, for example, that \emph{Free Mobile} doesn't have any base station w
     \end{tabular}
 \end{table}
 
-\subsection{Filtering the database}
+\subsection{Filtering the main database}
 As seen before this database is really huge, as a matter of fact we will only work on a portion of it.
 
 Firstly, only one provider will be kept because a \acrshort{bs} from provider $x$ can't be considered as a neighbour of \acrshort{bs} from provider $y$.
@@ -170,6 +170,10 @@ Secondly, for the same reasons as before, only one technology is kept. Thus, we 
 
 In order to simplify the calculation times, the vision and the assessment of the quality of the results, we will only work on sites located in the Normandy region.
 This is because Normandy is where our school is based, giving us a better view of its geography.
+
+\subsection{Additional database}
+In order to compare the results of city detection, we needed a reference database. We therefore used the population data provided by INSEE.
+[Pas sur de l'utilité de présenter cette base en fait, ptet juste la principale suffit]
 
 \section{Reminder on existing methods\label{sec:reminder}}
 \subsection{Finding potential neighbours}
