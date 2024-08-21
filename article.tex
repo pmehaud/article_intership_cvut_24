@@ -76,6 +76,27 @@ brendan.sevellec@insa-rouen.fr}}
     
     Given a list of points and their coordinates, a neighbouring problem consists in finding, for each point, a list of other points that are considered as its neighbours.
 
+    The field of neighbouring problems mainly revolves around the optimisation of the $k$ nearest neighbours algorithm ($k$-NN).
+    As indicated by its name, this method consists in considering the closest $k$ points of each points as their neighbour.
+    [insert KNN reference]
+
+    Another method consists in the using the Delauney triangulation. Each couple of points linked by an edge in this triangulation are considered neighbours.
+    [insert Delauney neighbouring reference]
+
+    The default of the $k$-NN method is that it always find the same number of neighbours to each point, independantly to the reality of the geometry around each base station.
+    
+    The Delaunay triangulation seems to solve this issue but it also have its own set of defaults, mostly on the borders of the data where it creates aberrant edges.
+
+    In any case, these generic methods aren't perfectly adapted to this application as real base stations are submitted to specific limitations.
+
+    Therefore, some researchs were done in order to adapt these methods to this specific application. \cite{patent_neighs}
+
+    This article aims at enhance the precision of these methods by taking into account the density of base station. It also aims at comparing the efficiency of different approaches. 
+
+    Therefore, the outcome of the method presented will be a neighbouring graph where each node is a base station and each edge represent a neighbouring relationship between these two base stations. In [insert citation], you can see an example of neighbouring graph.
+
+    The rest of the paper is organized as follows: Section II reviews the related works relevant to our research, providing a foundation by discussing prior studies and their limitations. In Section III, we detail the databases used in our analysis, including data sources, update frequency, and key characteristics. Section IV offers a reminder on existing methods, summarizing the methodologies previously applied to similar problems and setting the stage for our proposed approach. Section V outlines our contributions, emphasizing the novel aspects of our work and how it advances the field. In Section VI, we present the results, analyzing the performance and implications of our proposed methods. Finally, Section VII concludes the paper, summarizing key findings and suggesting directions for future research.
+
 \section{Related works}
     \noindent
 
@@ -248,7 +269,7 @@ brendan.sevellec@insa-rouen.fr}}
         \subsubsection{$3$-NN mean distance}
             For each base station $i$, the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma_i$, in $\unit{km}$). According to the value of $\gamma_i$, the base station will be classified into a different category.
 
-            If you want this method to work properly, only \acrshort{bs} from the same provider have to be kept into the calculation process.
+            For this method to work properly, only \acrshort{bs} from the same provider have to be kept into the calculation process.
             Althought this values are working well on France, we haven't tried yet on another country.
 
             % \begin{itemize}
@@ -278,7 +299,7 @@ brendan.sevellec@insa-rouen.fr}}
         \subsubsection{Distance and angle criterion}
             As seen in section~\ref{sec:reminder}, after having found potential neighbours for each base station, we need to filtrate this connexions. However, this applies the same distance and angle threshold for all base stations, without taking in account the difference of density.
 
-            The method we propose now is to take in account those differences of density for each site to apply a different threshold according to the category the site in classified in.
+            The method we propose now is to take into account those differences of density for each site to apply a different threshold according to the category the site in classified in.
 
             For both distance and angle, the more the base station is in a dense category, the lower this threshold will be.
 
