@@ -155,7 +155,7 @@ brendan.sevellec@insa-rouen.fr}}
             \caption{Breakdown, by operator, of the number of sites containing a given technology}
             \label{fig:data_technos}
         \end{figure}
-        We can see, for example, that \emph{Free Mobile} doesn't have any base station with $2$G technology. Additionally, you can als find these values in Table~\ref{table:techno_numbers}.
+        We can see, for example, that \emph{Free Mobile} doesn't have any base station with $2$G technology. Additionally, you can also find these values in Table~\ref{table:techno_numbers}.
         \begin{table}
             \centering
             \caption{Number of \acrfull{bs} equipped, at least, with $x$G, by provider}
@@ -325,13 +325,26 @@ brendan.sevellec@insa-rouen.fr}}
 \section{Results\label{sec:res}}
     \subsection{Measurement of \acrshort{bs} density}
 
+    \subsection{Best potential neighbours}
+        
     \subsection{Combining criteria}
-        As a matter of optimisation, criteria are applied one after another. For example, the base graph is Delaunay triangulation and we apply distance then angle.
-        The principle is that angle criterion will be applied on the Delaunay graph filtered with the distance criterion.
+        The accuracy of the results depends on which criteria are applied to potential neighbours, and also on the order in which they are applied.
 
-        As a consequence, results differ according to the order in which the criteria are applied.
+        Firstly, we used combinations three criteria. When doing this experiment, we realised that the results where really convincing but, sometimes, some connexions were suppressed even if there was no reason to suppress them. In addition, we observed that those results were mostly influenced by when the quadrant criterion is applied.
 
-        The best is Delaunay with distance and then angle.
+        Consequently, we tried combinations of two criteria. Then, all these unexplained suppressions disappeared, especially when the quadrant criterion wasn't applied.
+
+        Now, we have to choose between angle and distance or distance and angle. We will keep the second option because it is more optimised. Indeed, the distance criterion takes less of computer ressources, thus reducing the number of operations to treat by the angle criterion.
+
+        In Figure~\ref{fig:final_neighs} you have an illustration of a portion of the results. To clarify, the colour of the points, which represent the base stations, is in function of the $\gamma_i$ value.
+
+        In the future, we will have a method to compare our results with a reference. [pas sûr si on garde ca]
+        \begin{figure}
+            \centering
+            \boxed{\includegraphics[width=2.5in]{images/illus_graphs/final_neighs_del_da.png}}
+            \caption{The final neighbouring graph}
+            \label{fig:final_neighs}
+        \end{figure}
 
 \section{Conclusion\label{sec:ccl}}
     [Ouverture: prendre en compte les zazimuths]
