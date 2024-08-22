@@ -66,7 +66,13 @@ brendan.sevellec@insa-rouen.fr}}
 \maketitle
 
 \begin{abstract}
-    Nowadays, it is primordial for telecommunication companies to be able to determine if a user is moving. For that, it is necessary to understand the neighbouring relationships between the telephonic \acrlong{bs}s. This article aims at proposing and optimizing a method that adaptively detects these relationship between telephonic \acrlong{bs}s. This methods consists in multiple steps that can each be realised thanks to several methods that are compared: the $k$-NN method, the Delaunay triangulation or the Gabriel graph method are first used to create a first rough estimation of each point's neighbours. A filtering method is then applied in order to refine the neighbouring relationships that were found. This method is composed of several criteria that are succesfully being applied. These criterias are coming from previous works but were enhanced for better computational cost and results, and also to locally take into account the density of base station in the neighbours computation. The resulting method therefore gives a more accurate estimation of the neighbouring relationship than what was proposed before.
+    Nowadays, it is primordial for telecommunication companies to be able to determine if a user is moving. For that, it is necessary to understand the neighbouring relationships between the telephonic \acrlong{bs}s. This article aims at proposing and optimizing a method that adaptively detects these relationship between telephonic \acrlong{bs}s. 
+    
+    This methods consists in multiple steps that can each be realised thanks to several methods that are compared: the $k$-NN method, the Delaunay triangulation or the Gabriel graph method are first used to create a first rough estimation of each point's neighbours. A filtering step is then applied in order to refine the neighbouring relationships that were found. This step is composed of several criteria that are successively being applied. 
+    
+    These criteria are coming from previous works but were enhanced for better computational cost and results, and also to locally take into account the density of base station in the neighbours computation. 
+    
+    The resulting method therefore gives a more accurate estimation of the neighbouring relationship than what was proposed before.
 \end{abstract}
 \section{Introduction}
     \IEEEPARstart{T}{he} field of telecommunication represents a gigantic mine of information, the smartphone penetration rate being 69\% in 2023 in the world, and 97\% in France. Therefore, the collected datas represent a big opportunity for telecommunication companies to predict their customers behaviour for internal or marketing purposes. 
@@ -92,7 +98,7 @@ brendan.sevellec@insa-rouen.fr}}
 
     Therefore, some researchs were done in order to adapt these methods to this specific application \cite{patent_neighs}.
 
-    This article aims at enhance the precision of these methods by taking into account the density of \acrshort{bs}. It also aims at comparing the efficiency of different approaches. 
+    This article aims at enhance the precision of these methods . It also aims at comparing the efficiency of different approaches. 
 
     Therefore, the outcome of the method presented is a neighbouring graph, cf. Figure~\ref{fig:neigh_graph}, where each node is a \acrshort{bs} and each edge represent a neighbouring relationship between these two \acrshort{bs}s.
     \begin{figure}
@@ -102,7 +108,9 @@ brendan.sevellec@insa-rouen.fr}}
         \label{fig:neigh_graph}
     \end{figure}
 
-    The rest of the paper is organized as follows: Section~\ref{sec:rel_works} reviews the related works relevant to our research, providing a foundation by discussing prior studies and their limitations. In Section~\ref{sec:data}, we detail the databases used in our analysis, including data sources, update frequency, and key characteristics. Section~\ref{sec:reminder} offers a reminder on existing methods, summarizing the methodologies previously applied to similar problems and setting the stage for our proposed approach. Section~\ref{sec:contrib} outlines our contributions, emphasizing the novel aspects of our work and how it advances the field. In Section~\ref{sec:res}, we present the results, analyzing the performance and implications of our proposed methods. Finally, Section~\ref{sec:ccl} concludes the paper, summarizing key findings and suggesting directions for future research.
+    A key finding of this article is to locally take into account the density of \acrshort{bs} in the neighbouring methodology.
+
+    The rest of the paper is organized as follows: Section~\ref{sec:rel_works} reviews the related works relevant to our research. In Section~\ref{sec:data}, we detail the databases used in our analysis. Section~\ref{sec:overview} offers a reminder on existing methods. Section~\ref{sec:contrib} outlines our contributions. In Section~\ref{sec:res}, we present the results, analyzing the performance and implications of our proposed methods. Finally, Section~\ref{sec:ccl} concludes the paper and suggests directions for future research.
 
 \section{Related works\label{sec:rel_works}}
     \noindent
@@ -111,9 +119,9 @@ brendan.sevellec@insa-rouen.fr}}
     \noindent Several databases have been used in order to test the different aspects of the methods. However, one of them is directly necessary to the method itself.
 
     \subsection{Main database}
-        In our research we are using this database \cite{main_database} that contains all the information needed for the application of the method. It is from \acrfull{arcep}, which is an independent French administrative authority responsible for regulating electronic and postal communications and press distribution.
+        In this study, this database \cite{main_database} that contains all the information needed for the application of the method is being used. It is from \acrfull{arcep}, which is an independent French administrative authority responsible for regulating electronic and postal communications and press distribution.
 
-        This database was first published for the third quarter of 2017 and the version we are using was published on 28\textsuperscript{th} March 2024 \cite{main_database_hist}.
+        This database was first published for the third quarter of 2017 and the version used here was published on 28\textsuperscript{th} March 2024 \cite{main_database_hist}.
         It's updated for every quarter. For instance, this data refers to the fourth quarter of 2023.
 
         It consists of a substantial collection of $108\,838$ entries, encompassing $29$ distinct features of a size of $\unit[16.7]{Mo}$.
@@ -188,7 +196,7 @@ brendan.sevellec@insa-rouen.fr}}
         In order to compare the results of city detection, a reference database was needed. We therefore used the population data provided by INSEE.
         [Pas sûr de l'utilité de présenter cette base en fait, ptet juste la principale suffit]
 
-\section{Reminder on existing methods\label{sec:reminder}}
+\section{Overview of use methods\label{sec:overview}}
     \subsection{Finding potential neighbours}
         When looking for neighbours, at first, a list of potential neighbours for each point is necessary.
         For that, a neighbouring graph is constructed where $P$ is the set of all points and each edge in this graph represents a neighbouring relation.
