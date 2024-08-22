@@ -87,7 +87,7 @@ brendan.sevellec@insa-rouen.fr}}
     
     The Delaunay triangulation seems to solve this issue but it also have its own set of defaults, mostly on the borders of the data where it creates aberrant edges.
 
-    In any case, these generic methods aren't perfectly adapted to this application as real base stations are submitted to specific limitations.
+    Here we consider that two base stations are neighbours if their converage area overlap. Therefore, these generic methods aren't perfectly adapted to this application as these coverage areas are submitted to specific limitations like limitted radius and wave interferences.
 
     Therefore, some researchs were done in order to adapt these methods to this specific application \cite{patent_neighs}.
 
@@ -266,17 +266,15 @@ brendan.sevellec@insa-rouen.fr}}
         Therefore, we can assume that finding zones with a high density of base station is equivalent to finding the \acrshort{bs} situated in \og cities\fg{}.
 
         \subsubsection{\acrshort{dbscan}}
-            DBScan gives only two categories : city - countryside
-            [permet de faire que 2 categories : pas assez précis (mais ptet à mettre dans résultats)]
+            The most intuitive method to use when trying to locate zones with high a high density of point is \acrshort{dbscan}. In fact, by applying the methods with the right parameters, these zones will each be detected in a separate cluster and the rest will be considered as noise. Two categories are therefore created : city (all the clusters) and countryside (the noise)
 
         \subsubsection{\acrshort{hdbscan}}
-            ...
+            We can use \acrshort{hdbscan} the same way. However, the previously mentionned probability associated with each point belonging to a cluster can be used to separate the center of the city (where the probability is very high) from the rest of the city.
 
         \subsubsection{$3$-NN mean distance}
-            For each base station $i$, the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma_i$, in $\unit{km}$). According to the value of $\gamma_i$, the base station will be classified into a different category.
+            For each base station $i$, the mean distance to its three nearest neighbours is calculated (we will call this value $\gamma_i$, in $\unit{km}$). According to the value of $\gamma_i$, the base station will be classified into a different category of density. In fact, a low $\gamma_i$ means that the surrounding zone is very dense in base station. On the contrary, a high value translate to a low density area (countryside).
 
             For this method to work properly, only \acrshort{bs} from the same provider have to be kept into the calculation process.
-            Althought this values are working well on France, we haven't tried yet on another country.
 
             % \begin{itemize}
             %     \item city center: $\gamma_i\in [0,1]$;
