@@ -66,9 +66,8 @@ brendan.sevellec@insa-rouen.fr}}
 \maketitle
 
 \begin{abstract}
-    Nowadays, it is primordial for telecommunication companies to be able to determine if a user is moving. For that, it is necessary to understand the neighbouring relationships between the telephonic \acrlong{bs}s. This article aims at proposing and comparing different method, that aim at adaptively detect these relationship between telephonic \acrlong{bs}s. Therefore, it proposes a new method to create a neighbouring graph of \acrlong{bs}s via their geographical positions.
+    Nowadays, it is primordial for telecommunication companies to be able to determine if a user is moving. For that, it is necessary to understand the neighbouring relationships between the telephonic \acrlong{bs}s. This article aims at proposing and optimizing a method that adaptively detects these relationship between telephonic \acrlong{bs}s. This methods consists in multiple steps that can each be realised thanks to several methods that are compared : the $k$-NN method, the Delaunay triangulation or the Gabriel graph method are first used to create a first rough estimation of each point's neighbours. A filtering method is then applied in order to refine the neighbouring relationships that were found. This method is composed of several criteria that are succesfully being applied. These criterias are coming from previous works but were enhanced for better computational cost and results, and also to locally take into account the density of base station in the neighbours computation. The resulting method therefore gives a more accurate estimation of the neighbouring relationship than what was proposed before.
 \end{abstract}
-
 \section{Introduction}
     \IEEEPARstart{T}{he} field of telecommunication represents a gigantic mine of information, the smartphone penetration rate being 69\% in 2023 in the world, and 97\% in France. Therefore, the collected datas represent a big opportunity for telecommunication companies to predict their customers behaviour for internal or marketing purposes. 
     
