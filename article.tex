@@ -66,7 +66,7 @@ brendan.sevellec@insa-rouen.fr}}
 \maketitle
 
 \begin{abstract}
-    Nowadays, it is primordial for telecommunication companies to be able to determine if a user is moving. For that, it is necessary to understand the neighbouring relationships between the telephonic \acrlong{bs}s. This article aims at proposing and optimizing a method that adaptively detects these relationship between telephonic \acrlong{bs}s. This methods consists in multiple steps that can each be realised thanks to several methods that are compared : the $k$-NN method, the Delaunay triangulation or the Gabriel graph method are first used to create a first rough estimation of each point's neighbours. A filtering method is then applied in order to refine the neighbouring relationships that were found. This method is composed of several criteria that are succesfully being applied. These criterias are coming from previous works but were enhanced for better computational cost and results, and also to locally take into account the density of base station in the neighbours computation. The resulting method therefore gives a more accurate estimation of the neighbouring relationship than what was proposed before.
+    Nowadays, it is primordial for telecommunication companies to be able to determine if a user is moving. For that, it is necessary to understand the neighbouring relationships between the telephonic \acrlong{bs}s. This article aims at proposing and optimizing a method that adaptively detects these relationship between telephonic \acrlong{bs}s. This methods consists in multiple steps that can each be realised thanks to several methods that are compared: the $k$-NN method, the Delaunay triangulation or the Gabriel graph method are first used to create a first rough estimation of each point's neighbours. A filtering method is then applied in order to refine the neighbouring relationships that were found. This method is composed of several criteria that are succesfully being applied. These criterias are coming from previous works but were enhanced for better computational cost and results, and also to locally take into account the density of base station in the neighbours computation. The resulting method therefore gives a more accurate estimation of the neighbouring relationship than what was proposed before.
 \end{abstract}
 \section{Introduction}
     \IEEEPARstart{T}{he} field of telecommunication represents a gigantic mine of information, the smartphone penetration rate being 69\% in 2023 in the world, and 97\% in France. Therefore, the collected datas represent a big opportunity for telecommunication companies to predict their customers behaviour for internal or marketing purposes. 
@@ -266,7 +266,7 @@ brendan.sevellec@insa-rouen.fr}}
         Therefore, let's assume that finding zones with a high density of \acrshort{bs} is equivalent to finding the \acrshort{bs} situated in \og cities\fg{}.
 
         \subsubsection{\acrshort{dbscan}}
-            The most intuitive method to use when trying to locate zones with high a high density of point is \acrshort{dbscan}. In fact, by applying the methods with the right parameters, these zones are detected in separate clusters and the rest is considered as noise. Two categories are therefore created : city (all the clusters) and countryside (the noise).
+            The most intuitive method to use when trying to locate zones with high a high density of point is \acrshort{dbscan}. In fact, by applying the methods with the right parameters, these zones are detected in separate clusters and the rest is considered as noise. Two categories are therefore created: city (all the clusters) and countryside (the noise).
 
         \subsubsection{\acrshort{hdbscan}}
             We can use \acrshort{hdbscan} the same way. However, the previously mentionned probability associated with each point belonging to a cluster can be used to separate the center of the city (where the probability is very high) from the rest of the city.
@@ -324,7 +324,11 @@ brendan.sevellec@insa-rouen.fr}}
     \subsection{Measurement of \acrshort{bs} density}
 
     \subsection{Best potential neighbours}
+        First of all, the $k$-NN method could have provided a solution to the fact that the Delaunay triangulation does not connect all the points but makes choices. However, to obtain interesting connections, we need to choose a relatively high $k$, greater than 10, which implies a large number of connections and therefore an increase in   computational cost. What's more, applying the criteria doesn't even produce convincing results.
         
+        Secondly, the use of Gabriel's graph is not conclusive either. In fact, the use of this type of graph is not appropriate here because it will remove neighbourhood relationships that could have been retained.
+
+        Finally, taking into account the above conclusions, the method used to construct the potential neighbourhood is the Delaunay triangulation.
         
     \subsection{Combining criteria}
         The accuracy of the results depends on which criteria are applied to potential neighbours, and also on the order in which they are applied.
