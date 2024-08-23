@@ -49,12 +49,13 @@ brendan.sevellec@insa-rouen.fr}}
 \begin{IEEEkeywords}
     Neighbours, Telecommunication, Base station, $k$-NN, Adaptative.
 \end{IEEEkeywords}
+
 \section{Introduction}
-    \IEEEPARstart{T}{he} field of telecommunication represents a gigantic mine of information, the smartphone penetration rate being 69\% in 2023 in the world, and 97\% in France. Therefore, the collected datas represent a big opportunity for telecommunication companies to predict their customers behaviour for internal or marketing purposes. 
+    \IEEEPARstart{T}{he} field of telecommunication represents a gigantic mine of information, the smartphone penetration rate being $69\%$ in 2023 in the world, and $97\%$ in France. Therefore, the collected datas represent a big opportunity for telecommunication companies to predict their customers behaviour for internal or marketing purposes. 
     
     This article articulates around the themes of mobile networks and neighbouring problems. 
 
-    A cellular network, also know as a mobile network, is a type of telecommunications network that is dispersed over geographical areas known as cells, each of which is supplied by at least one fixed-location transceiver called base station (BS). These BSs give the cell network coverage so that voice, data, and other kinds of content may be transmitted.
+    A cellular network, also know as a mobile network, is a type of telecommunications network that is dispersed over geographical areas known as cells, each of which is supplied by at least one fixed-location transceiver called Base Station (BS). These BSs give the cell network coverage so that voice, data, and other kinds of content may be transmitted.
     
     Given a list of points and their coordinates, a neighbouring problem consists in finding, for each point, a list of other points that are considered as its neighbours.
 
@@ -62,8 +63,8 @@ brendan.sevellec@insa-rouen.fr}}
     As indicated by its name, this method consists in considering the closest $k$ points of each points as their neighbour.
     [insert KNN reference]
 
-    Another method consists in the using the Delauney triangulation. Each couple of points linked by an edge in this triangulation are considered neighbours.
-    [insert Delauney neighbouring reference]
+    Another method consists in the using the Delaunay triangulation. Each couple of points linked by an edge in this triangulation are considered neighbours.
+    [insert Delaunay neighbouring reference]
 
     The default of the $k$-NN method is that it always find the same number of neighbours to each point, independantly to the reality of the geometry around each BS.
     
@@ -88,7 +89,7 @@ brendan.sevellec@insa-rouen.fr}}
     The rest of the paper is organized as follows: Section~\ref{sec:rel_works} reviews the related works relevant to our research. In Section~\ref{sec:data}, we detail the databases used in our analysis. Section~\ref{sec:overview} offers an overview existing methods. Section~\ref{sec:contrib} outlines our contributions. In Section~\ref{sec:res}, we present the results, analyzing the performance and implications of our proposed methods. Finally, Section~\ref{sec:ccl} concludes the paper and suggests directions for future research.
 
 \section{Related works\label{sec:rel_works}}
-    \noindent 
+    \noindent When looking for neighbours, the first method that comes in mind is $k$-NN.
 
 \section{Databases\label{sec:data}}
     \noindent Several databases have been used in order to test the different aspects of the methods. However, one of them is directly necessary to the method itself.
@@ -239,7 +240,7 @@ brendan.sevellec@insa-rouen.fr}}
             To each point who belongs to a cluster is associated a probability that symbolises the degree of certainty for this point to belong to the said cluster.
 
 \section{Contributions\label{sec:contrib}}
-    \noindent In section~\ref{sec:overview}, we have seen that we can find the neighbours of BSs by combining a potential neighbouring graph and filtration criteria. This methodology gives pretty good results \cite{art_del_paq}.
+    \noindent In Section~\ref{sec:overview}, we have seen that we can find the neighbours of BSs by combining a potential neighbouring graph and filtration criteria. This methodology gives pretty good results \cite{art_del_paq}.
 
     However, in certain cases like in a city, the filtration criteria aren't precise enough. We, therefore, need to find some ways to measure BSs' density.
 
@@ -262,7 +263,7 @@ brendan.sevellec@insa-rouen.fr}}
     \subsection{Improvement of filtering criteria}
 
         \subsubsection{Distance and angle criterion}
-            As seen in section~\ref{sec:overview}, after having found potential neighbours for each BS, this connexions needs to be filtrated. However, this applies the same distance and angle threshold for all BSs, without taking in account the difference of density.
+            As seen in Section~\ref{sec:overview}, after having found potential neighbours for each BS, this connexions needs to be filtrated. However, this applies the same distance and angle threshold for all BSs, without taking in account the difference of density.
 
             The proposesd method is to take into account those differences of density for each site to apply a different threshold according to the category the site in classified in.
 
@@ -283,17 +284,35 @@ brendan.sevellec@insa-rouen.fr}}
 
 \section{Results\label{sec:res}}
     \subsection{Measurement of BS density}
-        Each of the three methods for detecting the high density base stations that were described above detect the major cities of France. It is even possible to accurately detect the name of these cities by looking, for each cluster, at the most represented "nom\_com" field of the base station of the cluster.
+        Each of the three methods for detecting the high density base stations that were described above detect the major cities of France. It is even possible to accurately detect the name of these cities by looking, for each cluster, at the most represented \textsl{nom\_com} field of the base station of the cluster.
 
-        Morevover, the correlation coefficient between the number of inhabitant and the number of base station is above 0.9 for each of the methods.
+        Morevover, the correlation coefficient between the number of inhabitant and the number of base station is above $0.9$ for each of the methods.
 
         As seen before, HDBScan is a method of variable density. In this use case, it is a drawback because the density of base station accurately represents the radius of each base station's coverage. It is therefore not advisable to treat each cluster differently. Plus, this method often presents aberrant clusters like the entire Corsica.
 
-        When comparing the cluster detected to the cities that have more than 7000 inhabitants, 3-NN is the method that has the best result. In fact, if we consider all base station with a $\gamma_p$ value inferior to 2 km to be in cities we find that the percentage at accurately classified base station is 88\%. It is 87\% for DBScan and 85\% for HDBScan.
+        When comparing the cluster detected to the cities that have more than $7\,000$ inhabitants, $3$-NN is the method that has the best result. In fact, if we consider all base station with a $\gamma_p$ value inferior to $\unit[2]{km}$ to be in cities we find that the percentage at accurately classified base station is $88\%$. It is $87\%$ for DBScan and $85\%$ for HDBScan. In Figure~\ref{fig:com_3NN},~\ref{fig:com_dbs} and~\ref{fig:com_hdb} those comparisons are illustrated: in red when the reference and the method agrees on city, in green on countryside and in blue when they don't agree.
+        \begin{figure}
+            \centering
+            \includegraphics[width=3.5in]{images/city_det_comp/comp_3-NN.png}
+            \caption{City detection comparison $3$-NN.}
+            \label{fig:com_3NN}
+        \end{figure}
+        \begin{figure}
+            \centering
+            \includegraphics[width=3.5in]{images/city_det_comp/comp_dbs.png}
+            \caption{City detection comparison DBScan.}
+            \label{fig:com_dbs}
+        \end{figure}
+        \begin{figure}
+            \centering
+            \includegraphics[width=3.5in]{images/city_det_comp/comp_hdbs.png}
+            \caption{City detection comparison HDBScan.}
+            \label{fig:com_hdb}
+        \end{figure}
 
-        Plus, as seen before, we can use the $\gamma_p$ value of the 3-NN method to classify each city in precise category, not only city vs coutryside. 
+        Plus, as seen before, we can use the $\gamma_p$ value of the $3$-NN method to classify each city in precise category, not only city vs coutryside. 
 
-        Here is the classification that has been chosen : 
+        Here is the classification that has been chosen: 
         \begin{itemize}
             \item city center: $\gamma_p\in [0,1]$;
             \item urban area: $\gamma_p\in ]1,2]$;
@@ -302,7 +321,7 @@ brendan.sevellec@insa-rouen.fr}}
         \end{itemize}
 
     \subsection{Best potential neighbours}
-        First of all, the $k$-NN method could have provided a solution to the fact that the Delaunay triangulation does not connect all the points but makes choices. However, to obtain interesting connections, we need to choose a relatively high $k$, greater than 10, which implies a large number of connections and therefore an increase in   computational cost. What's more, applying the criteria doesn't even produce convincing results.
+        First of all, the $k$-NN method could have provided a solution to the fact that the Delaunay triangulation does not connect all the points but makes choices. However, to obtain interesting connections, we need to choose a relatively high $k$, greater than $10$, which implies a large number of connections and therefore an increase in   computational cost. What's more, applying the criteria doesn't even produce convincing results.
         
         Secondly, the use of Gabriel's graph is not conclusive either. In fact, the use of this type of graph is not appropriate here because it will remove neighbourhood relationships that could have been retained.
 
@@ -310,7 +329,6 @@ brendan.sevellec@insa-rouen.fr}}
 
     \subsection{Optimizing criteria parameters}
         As seen in Section~\ref{sec:contrib}, the angle and distance criteria must adapt their threshold to the density of base station. The chosen thresholds for each of the previously introduced categories are presented in Table~\ref{table:crit_summary}. if both potential neighbours are in a different category, then the higher threshold is chosen.
-g
         \begin{table}
             \centering
             \caption{Summary of criteria values.}
