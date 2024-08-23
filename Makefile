@@ -7,7 +7,6 @@ FILENAME=article
 all:
 	$(LATEX) $(FILENAME).tex
 	bibtex $(FILENAME)
-	makeglossaries $(FILENAME)
 	$(LATEX) $(FILENAME).tex
 
 clean:

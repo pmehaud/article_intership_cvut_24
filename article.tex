@@ -2,8 +2,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsfonts,amssymb}
-\usepackage{algorithmic}
-\usepackage{algorithm}
+% \usepackage{algorithmic}
+% \usepackage{algorithm}
 \usepackage{array}
 \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
 \usepackage{textcomp}
@@ -19,10 +19,6 @@
  breaklinks=false,pdfborder={0 0 0},pdfborderstyle={},backref=false,colorlinks=true]{hyperref}
 \hypersetup{
  urlcolor=blue, linkcolor=black}
-\usepackage[acronym]{glossaries}
-\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
-
-\global\long\def\BDsites{\textsf{BD\_sites}}
 
 \title{Adaptative neighbouring methods applied to telephonic base stations}
 \author{\IEEEauthorblockN{Paul MÉHAUD}\\
@@ -35,30 +31,6 @@ paul.mehaud@insa-rouen.fr}\\
 \textit{INSA Rouen Normandie}\\
 brendan.sevellec@insa-rouen.fr}}
 
-\makeglossaries
-
-\setglossarypreamble{All definitions are from \href{https://www.dictionary.com/}{Dictionnary.com}}
-
-\newglossaryentry{base station}
-{
-    name=base station,
-    description={A fixed transmitter that forms part of an otherwise mobile radio network}
-}
-
-\newglossaryentry{convHull}
-{
-    name=convex hull,
-    description={The smallest convex set containing a given set}
-}
-
-
-
-\newacronym{arcep}{ARCEP}{French Regulatory Authority for Electronic Communications and Posts}
-\newacronym{anfr}{ANFR}{French National Frequency Agency}
-\newacronym{bs}{BS}{\gls{base station}}
-\newacronym{dbscan}{DBScan}{Density-Based Spatial Clustering of Applications with Noise}
-\newacronym{hdbscan}{HDBScan}{Hierarchical Density-Based Spatial Clustering of Applications with Noise}
-
 \usepackage[english,french]{babel}
 
 \begin{document}
@@ -66,7 +38,7 @@ brendan.sevellec@insa-rouen.fr}}
 \maketitle
 
 \begin{abstract}
-    Nowadays, it is primordial for telecommunication companies to be able to determine if a user is moving. For that, it is necessary to understand the neighbouring relationships between the telephonic \acrlong{bs}s. This article aims at proposing and optimizing a method that adaptively detects these relationship between telephonic \acrlong{bs}s. 
+    Nowadays, it is primordial for telecommunication companies to be able to determine if a user is moving. For that, it is necessary to understand the neighbouring relationships between the telephonic base stations. This article aims at proposing and optimizing a method that adaptively detects these relationship between telephonic base stations. 
     
     This methods consists in multiple steps that can each be realised thanks to several methods that are compared: the $k$-NN method, the Delaunay triangulation or the Gabriel graph method are first used to create a first rough estimation of each point's neighbours. A filtering step is then applied in order to refine the neighbouring relationships that were found. This step is composed of several criteria that are successively being applied. 
     
@@ -79,28 +51,28 @@ brendan.sevellec@insa-rouen.fr}}
     
     This article articulates around the themes of mobile networks and neighbouring problems. 
 
-    A cellular network, also know as a mobile network, is a type of telecommunications network that is dispersed over geographical areas known as cells, each of which is supplied by at least one fixed-location transceiver called \acrfull{bs}. These \acrshort{bs}s give the cell network coverage so that voice, data, and other kinds of content may be transmitted.
+    A cellular network, also know as a mobile network, is a type of telecommunications network that is dispersed over geographical areas known as cells, each of which is supplied by at least one fixed-location transceiver called base station (BS). These BSs give the cell network coverage so that voice, data, and other kinds of content may be transmitted.
     
     Given a list of points and their coordinates, a neighbouring problem consists in finding, for each point, a list of other points that are considered as its neighbours.
 
-    The field of neighbouring problems mainly revolves around the optimisation of the $k$ nearest neighbours algorithm ($k$-NN).
+    The field of neighbouring problems mainly revolves around the optimisation of the $k$ Nearest Neighbours ($k$-NN) algorithm.
     As indicated by its name, this method consists in considering the closest $k$ points of each points as their neighbour.
     [insert KNN reference]
 
     Another method consists in the using the Delauney triangulation. Each couple of points linked by an edge in this triangulation are considered neighbours.
     [insert Delauney neighbouring reference]
 
-    The default of the $k$-NN method is that it always find the same number of neighbours to each point, independantly to the reality of the geometry around each \acrshort{bs}.
+    The default of the $k$-NN method is that it always find the same number of neighbours to each point, independantly to the reality of the geometry around each BS.
     
     The Delaunay triangulation seems to solve this issue but it also have its own set of defaults, mostly on the borders of the data where it creates aberrant edges.
 
-    Here two \acrshort{bs}s are considered as neighbours if their converage area overlap. Therefore, these generic methods aren't perfectly adapted to this application as these coverage areas are submitted to specific limitations like limitted radius and wave interferences.
+    Here two BSs are considered as neighbours if their converage area overlap. Therefore, these generic methods aren't perfectly adapted to this application as these coverage areas are submitted to specific limitations like limitted radius and wave interferences.
 
     Therefore, some researchs were done in order to adapt these methods to this specific application \cite{patent_neighs}.
 
     This article aims at enhance the precision of these methods . It also aims at comparing the efficiency of different approaches. 
 
-    Therefore, the outcome of the method presented is a neighbouring graph, cf. Figure~\ref{fig:neigh_graph}, where each node is a \acrshort{bs} and each edge represent a neighbouring relationship between these two \acrshort{bs}s.
+    Therefore, the outcome of the method presented is a neighbouring graph, cf. Figure~\ref{fig:neigh_graph}, where each node is a BS and each edge represent a neighbouring relationship between these two BSs.
     \begin{figure}
         \centering
         \includegraphics[width=3.5in]{images/illus_graphs/neighbouring_graph.png}
@@ -108,18 +80,18 @@ brendan.sevellec@insa-rouen.fr}}
         \label{fig:neigh_graph}
     \end{figure}
 
-    A key finding of this article is to locally take into account the density of \acrshort{bs} in the neighbouring methodology.
+    A key finding of this article is to locally take into account the density of BS in the neighbouring methodology.
 
     The rest of the paper is organized as follows: Section~\ref{sec:rel_works} reviews the related works relevant to our research. In Section~\ref{sec:data}, we detail the databases used in our analysis. Section~\ref{sec:overview} offers an overview existing methods. Section~\ref{sec:contrib} outlines our contributions. In Section~\ref{sec:res}, we present the results, analyzing the performance and implications of our proposed methods. Finally, Section~\ref{sec:ccl} concludes the paper and suggests directions for future research.
 
 \section{Related works\label{sec:rel_works}}
-    \noindent
+    \noindent 
 
 \section{Databases\label{sec:data}}
     \noindent Several databases have been used in order to test the different aspects of the methods. However, one of them is directly necessary to the method itself.
 
     \subsection{Main database}
-        In this study, this database \cite{main_database} that contains all the information needed for the application of the method is being used. It is from \acrfull{arcep}, which is an independent French administrative authority responsible for regulating electronic and postal communications and press distribution.
+        In this study, this database \cite{main_database} that contains all the information needed for the application of the method is being used. It is from the French Regulatory Authority for Electronic Communications and Posts (ARCEP), which is an independent French administrative authority responsible for regulating electronic and postal communications and press distribution.
 
         This database was first published for the third quarter of 2017 and the version used here was published on 28\textsuperscript{th} March 2024 \cite{main_database_hist}.
         It's updated for every quarter. For instance, this data refers to the fourth quarter of 2023.
@@ -134,11 +106,11 @@ brendan.sevellec@insa-rouen.fr}}
                 \toprule
                 \textbf{Column} & \textbf{Description} \\
                 \cmidrule(lr){1-2}
-                \textsl{id\_station\_anfr} & \acrshort{anfr} \acrshort{bs} ID \\ 
+                \textsl{id\_station\_anfr} & ANFR BS ID \\ 
                 \textsl{nom\_op} & Name of the provider \\
                 \textsl{$x$, $y$, latitude, longitude} & Base station coordinates \\ 
                 \textsl{nom\_reg, nom\_dep, nom\_com} & Additional location information \\  
-                \textsl{site\_2g, 3g, 4g, 5g} & Technology used by the \acrshort{bs} \\ 
+                \textsl{site\_2g, 3g, 4g, 5g} & Technology used by the BS \\ 
                 \bottomrule
             \end{tabular}
         \end{table}
@@ -153,7 +125,7 @@ brendan.sevellec@insa-rouen.fr}}
         \begin{figure}
             \centering
             \includegraphics[width=3.5in]{images/data_analysis/technos-evolution.png}
-            \caption{Evolution by quarter year and by technology of the number of \acrshort{bs}.}
+            \caption{Evolution by quarter year and by technology of the number of BS.}
             \label{fig:data_evolution}
         \end{figure}
         Then, in Figure~\ref{fig:data_technos} a chart showing the number of times each technology is present for each provider can be found.
@@ -163,10 +135,10 @@ brendan.sevellec@insa-rouen.fr}}
             \caption{Breakdown, by operator, of the number of sites containing a given technology.}
             \label{fig:data_technos}
         \end{figure}
-        We can see, for example, that \emph{Free Mobile} doesn't have any \acrshort{bs} with $2$G technology. Additionally, you can also find these values in Table~\ref{table:techno_numbers}.
+        We can see, for example, that \emph{Free Mobile} doesn't have any BS with $2$G technology. Additionally, you can also find these values in Table~\ref{table:techno_numbers}.
         \begin{table}
             \centering
-            \caption{Number of \acrshort{bs} equipped, at least, with $x$G, by provider.}
+            \caption{Number of BS equipped, at least, with $x$G, by provider.}
             \label{table:techno_numbers}
             \begin{tabular}{cccccc}
                 \toprule
@@ -184,10 +156,10 @@ brendan.sevellec@insa-rouen.fr}}
     \subsection{Filtering the main database}
         As seen before this database is really big, as a matter of fact only a portion of it is used.
 
-        Firstly, only one provider is considered because a \acrshort{bs} from provider $x$ can't be considered as a neighbour of \acrshort{bs} from provider $y$.
-        Consequently, we have chosen \emph{Orange} because it is the one that has the largest number of \acrshort{bs}.
+        Firstly, only one provider is considered because a BS from provider $x$ can't be considered as a neighbour of BS from provider $y$.
+        Consequently, we have chosen \emph{Orange} because it is the one that has the largest number of BS.
 
-        Secondly, for the same reasons as before, only one technology is considered. Thus, all \acrshort{bs} using, at least, 4G are taken into account.
+        Secondly, for the same reasons as before, only one technology is considered. Thus, all BS using, at least, 4G are taken into account.
 
         In order to simplify the calculation times, the vision and the assessment of the quality of the results, only sites located in the Normandy region are studied.
         This is because Normandy is where our school is based, giving us a better view of its geography.
@@ -207,7 +179,7 @@ brendan.sevellec@insa-rouen.fr}}
             However, this method can be questioned, because it always finds $k$ neighbours for each point, no matter the reality of the data.
 
         \subsubsection{Delaunay triangulation}
-            A Delaunay triangulation \cite{art_delaunay} of a set of points in the plane subdivides their \gls{convHull} into triangles whose circumcircles do not contain any of the points.
+            A Delaunay triangulation \cite{art_delaunay} of a set of points in the plane subdivides their convex hull into triangles whose circumcircles do not contain any of the points.
 
             A Voronoi diagram is a tessellation pattern in which $n$ points scattered on a plane subdivides in exactly $n$ cells enclosing a portion of the plane that is closest to each point. 
 
@@ -230,26 +202,26 @@ brendan.sevellec@insa-rouen.fr}}
             Basically, the interset of this method, compared to the Delaunay triangulation, is that it is adding a first level of filtration to suppress some neighbouring connexions.
 
     \subsection{Finding real neighbours}
-        For the purpose of our experiments, i.e. finding \acrshort{bs} neighbours, the previously presented methods are not sufficient to find real neighbours.
+        For the purpose of our experiments, i.e. finding BS neighbours, the previously presented methods are not sufficient to find real neighbours.
         As a consequence, some neighbouring connexions needs to be suppressed \cite{patent_neighs}.
         \subsubsection{Distance criterion}
-            A \acrshort{bs} does not have an infinite coverage area.
+            A BS does not have an infinite coverage area.
             As a consequence, each edge in $U$ that is longer than a certain value, called \emph{max\_distance}, is suppressed.
 
         \subsubsection{Angle criterion}
-            Let $p$, $q$, $r$ be three \acrshort{bs} of $P$, where $q$ and $r$ are $p$'s potential neighbours. As said before, coverage areas of \acrshort{bs} are limited by physics, this also implies that $r$ can be \og hidden\fg{} from $p$ by $q$ because $q$ is between $p$ and $r$ [trouver qqch pour prouver ce que je dis].
+            Let $p$, $q$, $r$ be three BS of $P$, where $q$ and $r$ are $p$'s potential neighbours. As said before, coverage areas of BS are limited by physics, this also implies that $r$ can be \og hidden\fg{} from $p$ by $q$ because $q$ is between $p$ and $r$ [trouver qqch pour prouver ce que je dis].
 
             Therefore, the connexion between $p$ and $r$ needs to be suppressed. How? The angle $\widehat{qrp}$ is calculated and if it is narrower than a certain value, called \emph{min\_angle}, the longest edge is suppressed.
 
         \subsubsection{Quadrant criterion}
             As introduced in a previous article \cite{10201211} its goal is to prevent all potential neighbours to be in the same angle range. Therefore, it was mainly thought to be used with the $k$-NN potential neighbours method.
 
-            It consists in dividing the space around each \acrshort{bs} into quadrants and keeping only a certain number of potential neighbours in each of the quadrants, cf. Figure~\ref{fig:crit_qua}.
+            It consists in dividing the space around each BS into quadrants and keeping only a certain number of potential neighbours in each of the quadrants, cf. Figure~\ref{fig:crit_qua}.
             The number of quadrants has been fixed to six \cite{art_del_paq}.
 
     \subsection{Density-based clustering methods}
-        \subsubsection{\acrshort{dbscan}}
-            \acrshort{dbscan} consists in detecting clusters based on the density of points, using two parameters:
+        \subsubsection{DBScan}
+            DBScan consists in detecting clusters based on the density of points, using two parameters:
             \begin{itemize}
                 \item $\varepsilon$: A distance threshold under which two points are considered close enough to be considered neighbours;   
                 \item $n_{\text{min}}$: The shortest number of neighbours a points needs to have to be considered as a core point of a cluster.
@@ -257,32 +229,32 @@ brendan.sevellec@insa-rouen.fr}}
 
             The clusters are then \og growing\fg{} from the core points by attaching all points close from less than $\varepsilon$ than a point of the said cluster.
 
-        \subsubsection{\acrshort{hdbscan}}
-            \acrshort{hdbscan} \cite{10.1007/978-3-642-37456-2_14} is a variation of the \acrshort{dbscan} method.
+        \subsubsection{HDBScan}
+            HDBScan \cite{10.1007/978-3-642-37456-2_14} is a variation of the DBScan method.
             It consists in selecting the best clusters after testing their persistence by making the $\varepsilon$ parameter vary. It's main particularity is that it allows to detect clusters of different densities.
 
             To each point who belongs to a cluster is associated a probability that symbolises the degree of certainty for this point to belong to the said cluster.
 
 \section{Contributions\label{sec:contrib}}
-    \noindent In section~\ref{sec:overview}, we have seen that we can find the neighbours of \acrshort{bs}s by combining a potential neighbouring graph and filtration criteria. This methodology gives pretty good results \cite{art_del_paq}.
+    \noindent In section~\ref{sec:overview}, we have seen that we can find the neighbours of BSs by combining a potential neighbouring graph and filtration criteria. This methodology gives pretty good results \cite{art_del_paq}.
 
-    However, in certain cases like in a city, the filtration criteria aren't precise enough. We, therefore, need to find some ways to measure \acrshort{bs}s' density.
+    However, in certain cases like in a city, the filtration criteria aren't precise enough. We, therefore, need to find some ways to measure BSs' density.
 
-    \subsection{Measurement of \acrshort{bs} density}
-        Places with a high population also have a high density of \acrshort{bs}s. In fact, each \acrshort{bs} can only support a certain load of users.
+    \subsection{Measurement of BS density}
+        Places with a high population also have a high density of BSs. In fact, each BS can only support a certain load of users.
 
-        Therefore, let's assume that finding zones with a high density of \acrshort{bs} is equivalent to finding the \acrshort{bs} situated in \og cities\fg{}.
+        Therefore, let's assume that finding zones with a high density of BS is equivalent to finding the BS situated in \og cities\fg{}.
 
-        \subsubsection{\acrshort{dbscan}}
-            The most intuitive method to use when trying to locate zones with high a high density of point is \acrshort{dbscan}. In fact, by applying the methods with the right parameters, these zones are detected in separate clusters and the rest is considered as noise. Two categories are therefore created: city (all the clusters) and countryside (the noise).
+        \subsubsection{DBScan}
+            The most intuitive method to use when trying to locate zones with high a high density of point is DBScan. In fact, by applying the methods with the right parameters, these zones are detected in separate clusters and the rest is considered as noise. Two categories are therefore created: city (all the clusters) and countryside (the noise).
 
-        \subsubsection{\acrshort{hdbscan}}
-            We can use \acrshort{hdbscan} the same way. However, the previously mentionned probability associated with each point belonging to a cluster can be used to separate the center of the city (where the probability is very high) from the rest of the city.
+        \subsubsection{HDBScan}
+            We can use HDBScan the same way. However, the previously mentionned probability associated with each point belonging to a cluster can be used to separate the center of the city (where the probability is very high) from the rest of the city.
 
         \subsubsection{$3$-NN mean distance}
-            For each \acrshort{bs} $p\in P$, the mean distance $\gamma_p$, in $\unit{km}$, to its three nearest neighbours is calculated. According to the value of $\gamma_p$, a \acrshort{bs} is classified into a different category of density. In fact, a low $\gamma_p$ means that the surrounding zone is very dense in \acrshort{bs}. On the contrary, a high value translate to a low density area (countryside).
+            For each BS $p\in P$, the mean distance $\gamma_p$, in $\unit{km}$, to its three nearest neighbours is calculated. According to the value of $\gamma_p$, a BS is classified into a different category of density. In fact, a low $\gamma_p$ means that the surrounding zone is very dense in BS. On the contrary, a high value translate to a low density area (countryside).
 
-            For this method to work properly, only \acrshort{bs} from the same provider have to be kept into the calculation process.
+            For this method to work properly, only BS from the same provider have to be kept into the calculation process.
 
             % \begin{itemize}
             %     \item city center: $\gamma_p\in [0,1]$;
@@ -309,11 +281,11 @@ brendan.sevellec@insa-rouen.fr}}
         \end{table}
 
         \subsubsection{Distance and angle criterion}
-            As seen in section~\ref{sec:overview}, after having found potential neighbours for each \acrshort{bs}, this connexions needs to be filtrated. However, this applies the same distance and angle threshold for all \acrshort{bs}s, without taking in account the difference of density.
+            As seen in section~\ref{sec:overview}, after having found potential neighbours for each BS, this connexions needs to be filtrated. However, this applies the same distance and angle threshold for all BSs, without taking in account the difference of density.
 
             The proposesd method is to take into account those differences of density for each site to apply a different threshold according to the category the site in classified in.
 
-            For both distance and angle, the more the \acrshort{bs} is in a dense category, the lower this threshold is.
+            For both distance and angle, the more the BS is in a dense category, the lower this threshold is.
 
         \subsubsection{Quadrant criterion}
             This criterion has been upgraded by adding the possibility to rotate the quadrants. The offset angle selected, which is between $0$ and $60$ degrees, is the one that maximises the sum of the distances of the potential neighbours to their closest quadrant delimitation.
@@ -329,7 +301,7 @@ brendan.sevellec@insa-rouen.fr}}
             \end{figure}
 
 \section{Results\label{sec:res}}
-    \subsection{Measurement of \acrshort{bs} density}
+    \subsection{Measurement of BS density}
 
     \subsection{Best potential neighbours}
         First of all, the $k$-NN method could have provided a solution to the fact that the Delaunay triangulation does not connect all the points but makes choices. However, to obtain interesting connections, we need to choose a relatively high $k$, greater than 10, which implies a large number of connections and therefore an increase in   computational cost. What's more, applying the criteria doesn't even produce convincing results.
@@ -347,7 +319,7 @@ brendan.sevellec@insa-rouen.fr}}
 
         Now, we have to choose between angle and distance or distance and angle. The second option is prefered because it is more optimised. Indeed, the distance criterion takes less of computer ressources, thus reducing the number of operations to treat by the angle criterion.
 
-        In Figure~\ref{fig:final_neighs} you have an illustration of a portion of the results. To clarify, the colour of the points, which represent the \acrshort{bs}s, is in function of the $\gamma_p$ value.
+        In Figure~\ref{fig:final_neighs} you have an illustration of a portion of the results. To clarify, the colour of the points, which represent the BSs, is in function of the $\gamma_p$ value.
 
         In the future, there will be method to compare our results with a reference. [pas sûr si on garde ca]
         \begin{figure}
@@ -359,9 +331,6 @@ brendan.sevellec@insa-rouen.fr}}
 
 \section{Conclusion\label{sec:ccl}}
     [Ouverture: prendre en compte les zazimuths]
-
-\printglossary[type=\acronymtype]
-\printglossary
 
 \bibliographystyle{IEEEtran}
 \bibliography{./biblio.bib}
