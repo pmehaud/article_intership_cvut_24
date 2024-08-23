@@ -365,7 +365,6 @@ brendan.sevellec@insa-rouen.fr}}
 
         In Figure~\ref{fig:final_neighs} you have an illustration of a portion of the results. To clarify, the colour of the points, which represent the BSs, is in function of the $\gamma_p$ value.
 
-        In the future, there will be method to compare our results with a reference.
         \begin{figure}
             \centering
             \includegraphics[width=3.5in]{images/illus_graphs/final_neighs_del_da.png}
@@ -374,7 +373,13 @@ brendan.sevellec@insa-rouen.fr}}
         \end{figure}
 
 \section{Conclusion\label{sec:ccl}}
-    [Ouverture: prendre en compte les zazimuths]
+    The presented method successfully detects the neighbourhood of the base stations from Orange using 4G technology in France. It is an upgrade from previously introduced methods because it locally takes into account the density of base station to compute the neighbouring relationships.
+    
+    Future works could evaluate its performance on other providers or even, using another database, in another country.
+
+    Another important work would be to create an exact method to detect the neighbours of each base station, however the computationnal cost. It would allow to have an objective element of reference when tuning the parameters of the method presented here, that is the categories of $\gamma_p$ values and their associated threshold in the criterias. For that, it would be interesting to use a database including the azimuth angle of each base station (the direction of each antenna of the base station) to simulate the coverage of each base station and therefore be able to predict when they overlap, which means the two base stations are neighbours.
+
+    Finally, this work can be used inside bigger work that are being made in order to predict the users behaviour inside the telephonic network.
 
 \bibliographystyle{IEEEtran}
 \bibliography{./biblio.bib}
