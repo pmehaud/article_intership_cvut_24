@@ -49,12 +49,13 @@ brendan.sevellec@insa-rouen.fr}}
 \begin{IEEEkeywords}
     Neighbours, Telecommunication, Base station, $k$-NN, Adaptative.
 \end{IEEEkeywords}
+
 \section{Introduction}
     \IEEEPARstart{T}{he} field of telecommunication represents a gigantic mine of information, the smartphone penetration rate being 69\% in 2023 in the world, and 97\% in France. Therefore, the collected datas represent a big opportunity for telecommunication companies to predict their customers behaviour for internal or marketing purposes. 
     
     This article articulates around the themes of mobile networks and neighbouring problems. 
 
-    A cellular network, also know as a mobile network, is a type of telecommunications network that is dispersed over geographical areas known as cells, each of which is supplied by at least one fixed-location transceiver called base station (BS). These BSs give the cell network coverage so that voice, data, and other kinds of content may be transmitted.
+    A cellular network, also know as a mobile network, is a type of telecommunications network that is dispersed over geographical areas known as cells, each of which is supplied by at least one fixed-location transceiver called Base Station (BS). These BSs give the cell network coverage so that voice, data, and other kinds of content may be transmitted.
     
     Given a list of points and their coordinates, a neighbouring problem consists in finding, for each point, a list of other points that are considered as its neighbours.
 
@@ -62,8 +63,8 @@ brendan.sevellec@insa-rouen.fr}}
     As indicated by its name, this method consists in considering the closest $k$ points of each points as their neighbour.
     [insert KNN reference]
 
-    Another method consists in the using the Delauney triangulation. Each couple of points linked by an edge in this triangulation are considered neighbours.
-    [insert Delauney neighbouring reference]
+    Another method consists in the using the Delaunay triangulation. Each couple of points linked by an edge in this triangulation are considered neighbours.
+    [insert Delaunay neighbouring reference]
 
     The default of the $k$-NN method is that it always find the same number of neighbours to each point, independantly to the reality of the geometry around each BS.
     
@@ -88,7 +89,7 @@ brendan.sevellec@insa-rouen.fr}}
     The rest of the paper is organized as follows: Section~\ref{sec:rel_works} reviews the related works relevant to our research. In Section~\ref{sec:data}, we detail the databases used in our analysis. Section~\ref{sec:overview} offers an overview existing methods. Section~\ref{sec:contrib} outlines our contributions. In Section~\ref{sec:res}, we present the results, analyzing the performance and implications of our proposed methods. Finally, Section~\ref{sec:ccl} concludes the paper and suggests directions for future research.
 
 \section{Related works\label{sec:rel_works}}
-    \noindent 
+    \noindent When looking for neighbours, the first method that comes in mind is $k$-NN.
 
 \section{Databases\label{sec:data}}
     \noindent Several databases have been used in order to test the different aspects of the methods. However, one of them is directly necessary to the method itself.
@@ -239,7 +240,7 @@ brendan.sevellec@insa-rouen.fr}}
             To each point who belongs to a cluster is associated a probability that symbolises the degree of certainty for this point to belong to the said cluster.
 
 \section{Contributions\label{sec:contrib}}
-    \noindent In section~\ref{sec:overview}, we have seen that we can find the neighbours of BSs by combining a potential neighbouring graph and filtration criteria. This methodology gives pretty good results \cite{art_del_paq}.
+    \noindent In Section~\ref{sec:overview}, we have seen that we can find the neighbours of BSs by combining a potential neighbouring graph and filtration criteria. This methodology gives pretty good results \cite{art_del_paq}.
 
     However, in certain cases like in a city, the filtration criteria aren't precise enough. We, therefore, need to find some ways to measure BSs' density.
 
@@ -284,7 +285,7 @@ brendan.sevellec@insa-rouen.fr}}
         \end{table}
 
         \subsubsection{Distance and angle criterion}
-            As seen in section~\ref{sec:overview}, after having found potential neighbours for each BS, this connexions needs to be filtrated. However, this applies the same distance and angle threshold for all BSs, without taking in account the difference of density.
+            As seen in Section~\ref{sec:overview}, after having found potential neighbours for each BS, this connexions needs to be filtrated. However, this applies the same distance and angle threshold for all BSs, without taking in account the difference of density.
 
             The proposesd method is to take into account those differences of density for each site to apply a different threshold according to the category the site in classified in.
 
