@@ -256,29 +256,7 @@ brendan.sevellec@insa-rouen.fr}}
 
             For this method to work properly, only BS from the same provider have to be kept into the calculation process.
 
-            % \begin{itemize}
-            %     \item city center: $\gamma_p\in [0,1]$;
-            %     \item urban area: $\gamma_p\in ]1,2]$;
-            %     \item extra-urban: $\gamma_p\in ]2,4]$;
-            %     \item countryside: $\gamma_p\in ]4,\infty[$.
-            % \end{itemize}
-
     \subsection{Improvement of filtering criteria}
-        \begin{table}
-            \centering
-            \caption{Summary of criteria values.}
-            \label{table:crit_summary}
-            \begin{tabular}{lcc}
-                \toprule
-                \textbf{Description} & \textbf{\emph{max\_distance}} & \textbf{\emph{min\_angle}} \\
-                \cmidrule(lr){1-3}
-                city center & $\unit[2]{km}$ & $5^\circ$ \\
-                urban area & $\unit[5]{km}$ & $10^\circ$ \\
-                extra-urban area & $\unit[10]{km}$ & $15^\circ$ \\
-                countryside & $\unit[15]{km}$ & $20^\circ$ \\
-                \bottomrule
-            \end{tabular}
-        \end{table}
 
         \subsubsection{Distance and angle criterion}
             As seen in section~\ref{sec:overview}, after having found potential neighbours for each BS, this connexions needs to be filtrated. However, this applies the same distance and angle threshold for all BSs, without taking in account the difference of density.
@@ -302,6 +280,23 @@ brendan.sevellec@insa-rouen.fr}}
 
 \section{Results\label{sec:res}}
     \subsection{Measurement of BS density}
+        Each of the three methods for detecting the high density base stations that were described above detect the major cities of France. It is even possible to accurately detect the name of these cities by looking, for each cluster, at the most represented "nom\_com" field of the base station of the cluster.
+
+        Morevover, the correlation coefficient between the number of inhabitant and the number of base station is above 0.9 for each of the methods.
+
+        As seen before, HDBScan is a method of variable density. In this use case, it is a drawback because the density of base station accurately represents the radius of each base station's coverage. It is therefore not advisable to treat each cluster differently. Plus, this method often presents aberrant clusters like the entire Corsica.
+
+        When comparing the cluster detected to the cities that have more than 7000 inhabitants, 3-NN is the method that has the best result. In fact, if we consider all base station with a $\gamma_p$ value inferior to 2 km to be in cities we find that the percentage at accurately classified base station is 88\%. It is 87\% for DBScan and 85\% for HDBScan.
+
+        Plus, as seen before, we can use the $\gamma_p$ value of the 3-NN method to classify each city in precise category, not only city vs coutryside. 
+
+        Here is the classification that has been chosen : 
+        \begin{itemize}
+            \item city center: $\gamma_p\in [0,1]$;
+            \item urban area: $\gamma_p\in ]1,2]$;
+            \item extra-urban: $\gamma_p\in ]2,4]$;
+            \item countryside: $\gamma_p\in ]4,\infty[$.
+        \end{itemize}
 
     \subsection{Best potential neighbours}
         First of all, the $k$-NN method could have provided a solution to the fact that the Delaunay triangulation does not connect all the points but makes choices. However, to obtain interesting connections, we need to choose a relatively high $k$, greater than 10, which implies a large number of connections and therefore an increase in   computational cost. What's more, applying the criteria doesn't even produce convincing results.
@@ -309,6 +304,26 @@ brendan.sevellec@insa-rouen.fr}}
         Secondly, the use of Gabriel's graph is not conclusive either. In fact, the use of this type of graph is not appropriate here because it will remove neighbourhood relationships that could have been retained.
 
         Finally, taking into account the above conclusions, the method used to construct the potential neighbourhood is the Delaunay triangulation.
+
+    \subsection{Optimizing criteria parameters}
+        As seen in Section~\ref{sec:contrib}, the angle and distance criteria must adapt their threshold to the density of base station. The chosen thresholds for each of the previously introduced categories are presented in Table~\ref{table:crit_summary}. if both potential neighbours are in a different category, then the higher threshold is chosen.
+g
+        \begin{table}
+            \centering
+            \caption{Summary of criteria values.}
+            \label{table:crit_summary}
+            \begin{tabular}{lcc}
+                \toprule
+                \textbf{Description} & \textbf{\emph{max\_distance}} & \textbf{\emph{min\_angle}} \\
+                \cmidrule(lr){1-3}
+                city center & $\unit[2]{km}$ & $5^\circ$ \\
+                urban area & $\unit[5]{km}$ & $10^\circ$ \\
+                extra-urban area & $\unit[10]{km}$ & $15^\circ$ \\
+                countryside & $\unit[15]{km}$ & $20^\circ$ \\
+                \bottomrule
+            \end{tabular}
+        \end{table}
+    
         
     \subsection{Combining criteria}
         The accuracy of the results depends on which criteria are applied to potential neighbours, and also on the order in which they are applied.
