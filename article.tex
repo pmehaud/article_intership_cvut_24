@@ -110,7 +110,7 @@ brendan.sevellec@insa-rouen.fr}}
 
     A key finding of this article is to locally take into account the density of \acrshort{bs} in the neighbouring methodology.
 
-    The rest of the paper is organized as follows: Section~\ref{sec:rel_works} reviews the related works relevant to our research. In Section~\ref{sec:data}, we detail the databases used in our analysis. Section~\ref{sec:overview} offers a reminder on existing methods. Section~\ref{sec:contrib} outlines our contributions. In Section~\ref{sec:res}, we present the results, analyzing the performance and implications of our proposed methods. Finally, Section~\ref{sec:ccl} concludes the paper and suggests directions for future research.
+    The rest of the paper is organized as follows: Section~\ref{sec:rel_works} reviews the related works relevant to our research. In Section~\ref{sec:data}, we detail the databases used in our analysis. Section~\ref{sec:overview} offers an overview existing methods. Section~\ref{sec:contrib} outlines our contributions. In Section~\ref{sec:res}, we present the results, analyzing the performance and implications of our proposed methods. Finally, Section~\ref{sec:ccl} concludes the paper and suggests directions for future research.
 
 \section{Related works\label{sec:rel_works}}
     \noindent
@@ -264,7 +264,7 @@ brendan.sevellec@insa-rouen.fr}}
             To each point who belongs to a cluster is associated a probability that symbolises the degree of certainty for this point to belong to the said cluster.
 
 \section{Contributions\label{sec:contrib}}
-    \noindent In section~\ref{sec:reminder}, we have seen that we can find the neighbours of \acrshort{bs}s by combining a potential neighbouring graph and filtration criteria. This methodology gives pretty good results \cite{art_del_paq}.
+    \noindent In section~\ref{sec:overview}, we have seen that we can find the neighbours of \acrshort{bs}s by combining a potential neighbouring graph and filtration criteria. This methodology gives pretty good results \cite{art_del_paq}.
 
     However, in certain cases like in a city, the filtration criteria aren't precise enough. We, therefore, need to find some ways to measure \acrshort{bs}s' density.
 
@@ -309,7 +309,7 @@ brendan.sevellec@insa-rouen.fr}}
         \end{table}
 
         \subsubsection{Distance and angle criterion}
-            As seen in section~\ref{sec:reminder}, after having found potential neighbours for each \acrshort{bs}, this connexions needs to be filtrated. However, this applies the same distance and angle threshold for all \acrshort{bs}s, without taking in account the difference of density.
+            As seen in section~\ref{sec:overview}, after having found potential neighbours for each \acrshort{bs}, this connexions needs to be filtrated. However, this applies the same distance and angle threshold for all \acrshort{bs}s, without taking in account the difference of density.
 
             The proposesd method is to take into account those differences of density for each site to apply a different threshold according to the category the site in classified in.
 
