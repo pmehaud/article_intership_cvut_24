@@ -74,7 +74,7 @@ brendan.sevellec@insa-rouen.fr}}
 
     Therefore, some researchs were done in order to adapt these methods to this specific application \cite{patent_neighs}.
 
-    This article aims at enhance the precision of these methods . It also aims at comparing the efficiency of different approaches. 
+    This article aims at enhance the precision of these methods. It also aims at comparing the efficiency of different approaches. 
 
     Therefore, the outcome of the method presented is a neighbouring graph, cf. Figure~\ref{fig:neigh_graph}, where each node is a BS and each edge represent a neighbouring relationship between these two BSs.
     \begin{figure}
@@ -89,7 +89,15 @@ brendan.sevellec@insa-rouen.fr}}
     The rest of the paper is organized as follows: Section~\ref{sec:rel_works} reviews the related works relevant to our research. In Section~\ref{sec:data}, we detail the databases used in our analysis. Section~\ref{sec:overview} offers an overview existing methods. Section~\ref{sec:contrib} outlines our contributions. In Section~\ref{sec:res}, we present the results, analyzing the performance and implications of our proposed methods. Finally, Section~\ref{sec:ccl} concludes the paper and suggests directions for future research.
 
 \section{Related works\label{sec:rel_works}}
-    \noindent When looking for neighbours, the first method that comes in mind is $k$-NN.
+    \noindent When looking for neighbours, the first method that comes in mind is $k$-NN \cite{10201211}.
+
+    However, this method is not the most adapted to our specific problem. Consequently, more adapted methods can be found.
+
+    For example, the second method that is used to resolve such a problem is the Delaunay triangulation \cite{delaunay_neighbor} but this is still not perfect. For instance, on the border of the set of points some neighbouring connexion does not reflect the reality of physics. As a consequence, a method to filtrate those connexions needs to be implemented.
+
+    So, to solve this new problem, there is existing methods that can be sufficient \cite{art_del_paq, patent_neighs}, i.e. applying the same criteria for each BS.
+
+    Taking those existing methods into account, we realised that they are still not sufficient. Then, here is the major improvement of our work: take account of differences in BSs' density.
 
 \section{Databases\label{sec:data}}
     \noindent Several databases have been used in order to test the different aspects of the methods. However, one of them is directly necessary to the method itself.
