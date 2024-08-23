@@ -290,7 +290,25 @@ brendan.sevellec@insa-rouen.fr}}
 
         As seen before, HDBScan is a method of variable density. In this use case, it is a drawback because the density of base station accurately represents the radius of each base station's coverage. It is therefore not advisable to treat each cluster differently. Plus, this method often presents aberrant clusters like the entire Corsica.
 
-        When comparing the cluster detected to the cities that have more than $7\,000$ inhabitants, $3$-NN is the method that has the best result. In fact, if we consider all base station with a $\gamma_p$ value inferior to $\unit[2]{km}$ to be in cities we find that the percentage at accurately classified base station is $88\%$. It is $87\%$ for DBScan and $85\%$ for HDBScan.
+        When comparing the cluster detected to the cities that have more than $7\,000$ inhabitants, $3$-NN is the method that has the best result. In fact, if we consider all base station with a $\gamma_p$ value inferior to $\unit[2]{km}$ to be in cities we find that the percentage at accurately classified base station is $88\%$. It is $87\%$ for DBScan and $85\%$ for HDBScan. In Figure~\ref{fig:com_3NN},~\ref{fig:com_dbs} and~\ref{fig:com_hdb} those comparisons are illustrated: in red when the reference and the method agrees on city, in green on countryside and in blue when they don't agree.
+        \begin{figure}
+            \centering
+            \includegraphics[width=3.5in]{images/city_det_comp/comp_3-NN.png}
+            \caption{City detection comparison $3$-NN.}
+            \label{fig:com_3NN}
+        \end{figure}
+        \begin{figure}
+            \centering
+            \includegraphics[width=3.5in]{images/city_det_comp/comp_dbs.png}
+            \caption{City detection comparison DBScan.}
+            \label{fig:com_dbs}
+        \end{figure}
+        \begin{figure}
+            \centering
+            \includegraphics[width=3.5in]{images/city_det_comp/comp_hdbs.png}
+            \caption{City detection comparison HDBScan.}
+            \label{fig:com_hdb}
+        \end{figure}
 
         Plus, as seen before, we can use the $\gamma_p$ value of the $3$-NN method to classify each city in precise category, not only city vs coutryside. 
 
