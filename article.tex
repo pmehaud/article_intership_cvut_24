@@ -17,8 +17,7 @@
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
  breaklinks=false,pdfborder={0 0 0},pdfborderstyle={},backref=false,colorlinks=true]{hyperref}
-\hypersetup{
- urlcolor=blue, linkcolor=black}
+\hypersetup{urlcolor=blue, linkcolor=black}
 
 \title{Adaptative neighbouring methods applied to telephonic base stations}
 \author{\IEEEauthorblockN{Paul MÉHAUD}\\
@@ -313,11 +312,11 @@ brendan.sevellec@insa-rouen.fr}}
     \subsection{Combining criteria}
         The accuracy of the results depends on which criteria are applied to potential neighbours, and also on the order in which they are applied.
 
-        Firstly, we used combinations three criteria. When doing this experiment, we realised that the results where really convincing but, sometimes, some connexions were suppressed even if there was no reason to suppress them. In addition, we observed that those results were mostly influenced by when the quadrant criterion is applied.
+        Firstly, the tests focused on the various possible combinations of the three criteria. When doing this experiment, the results were really convincing but, sometimes, some connexions were suppressed even if there was no reason to suppress them. In addition, those results were mostly influenced by when the quadrant criterion is applied.
 
-        Consequently, we tried combinations of two criteria. Then, all these unexplained suppressions disappeared, especially when the quadrant criterion wasn't applied.
+        Consequently, combinations of two criteria were experimented. At that moment, all these unexplained suppressions disappeared, especially when the quadrant criterion wasn't applied.
 
-        Now, we have to choose between angle and distance or distance and angle. The second option is prefered because it is more optimised. Indeed, the distance criterion takes less of computer ressources, thus reducing the number of operations to treat by the angle criterion.
+        Now a choice has to be made between which criterion to apply first: distance or angle? The first option is prefered because it is more optimised. Indeed, the distance criterion takes less of computer ressources, thus reducing the number of operations to treat by the angle criterion.
 
         In Figure~\ref{fig:final_neighs} you have an illustration of a portion of the results. To clarify, the colour of the points, which represent the BSs, is in function of the $\gamma_p$ value.
 
