@@ -165,7 +165,7 @@
     \subsection{Filtering the main database}
         As seen before this database is really big, as a matter of fact only a portion of it is used.
 
-        Firstly, only one provider is considered because a BS from provider $x$ can't be considered as a neighbour of BS from provider $y$.
+        Firstly, only one provider is considered because a BS from provider A can't be considered as a neighbour of BS from provider B.
         Consequently, we have chosen \emph{Orange} because it is the one that has the largest number of BS.
 
         Secondly, for the same reasons as before, only one technology is considered. Thus, all BS using, at least, 4G are taken into account.
@@ -179,10 +179,10 @@
 \section{Overview of use methods\label{sec:overview}}
     \subsection{Finding potential neighbours}
         When looking for neighbours, at first, a list of potential neighbours for each point is necessary.
-        For that, a neighbouring graph is constructed where $P$ is the set of all points and each edge in this graph represents a neighbouring relation.
+        For that, a neighbouring graph is constructed, where the set of nodes $P$ is composed of all the selected base stations and each edge in this graph represents a neighbouring relation.
 
         \subsubsection{$k$-NN graph}
-            The most intuitive method is to connect each point to its $k$ nearest neighbours, where $k \in \mathbb{N}^*$ is a parameter to be set up. 
+            The most intuitive method to do so is to connect each point to its $k$ nearest neighbours, where $k \in \mathbb{N}^*$ is a parameter to be set up. 
 
             However, this method can be questioned, because it always finds $k$ neighbours for each point, no matter the reality of the data.
 
@@ -210,8 +210,9 @@
             Basically, the interset of this method, compared to the Delaunay triangulation, is that it is adding a first level of filtration to suppress some neighbouring connexions.
 
     \subsection{Finding real neighbours}
-        For the purpose of our experiments, i.e. finding BS neighbours, the previously presented methods are not sufficient to find real neighbours.
-        As a consequence, some neighbouring connexions needs to be suppressed \cite{patent_neighs}.
+        For the purpose of our experiments, i.e. finding BS neighbours, the previously presented methods are not sufficient to find real neighbours. In fact, as said before, base stations are subject to physical constraints that need to be taken into account.
+
+        As a consequence, some neighbouring connexions needs to be suppressed via several criteria\cite{patent_neighs}.
         \subsubsection{Distance criterion}
             A BS does not have an infinite coverage area.
             As a consequence, each edge in $U$ that is longer than a certain value, called \emph{max\_distance}, is suppressed.
@@ -228,6 +229,7 @@
             The number of quadrants has been fixed to six \cite{art_del_paq}.
 
     \subsection{Density-based clustering methods}
+        As explained later on the paper, we need to be able to assess the density of base stations, we therefore need density based clustering methods.
         \subsubsection{DBScan}
             DBScan consists in detecting clusters based on the density of points, using two parameters:
             \begin{itemize}
