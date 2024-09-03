@@ -39,7 +39,7 @@ brendan.sevellec@insa-rouen.fr}}
 \begin{abstract}
     Nowadays, it is primordial for telecommunication companies to be able to determine if a user is moving. For that, it is necessary to understand the neighbouring relationships between the telephonic base stations. This article aims at proposing and optimizing a method that adaptively detects these relationship between telephonic base stations. 
     
-    This methods consists in multiple steps that can each be realised thanks to several methods that are compared: the $k$-NN method, the Delaunay triangulation or the Gabriel graph method are first used to create a first rough estimation of each point's neighbours. A filtering step is then applied in order to refine the neighbouring relationships that were found. This step is composed of several criteria that are successively being applied. 
+    This methods consists in multiple steps that can each be realised thanks to several methods that are compared: the $k$-NN method, the Delaunay triangulation or the Gabriel graph method are first used to create a rough estimation of each point's neighbours. A filtering step is then applied in order to refine the neighbouring relationships that were found. This step is composed of several criteria that are successively being applied. 
     
     These criteria are coming from previous works but were enhanced for better computational cost and results, and also to locally take into account the density of base station in the neighbours computation. 
     
@@ -60,11 +60,9 @@ brendan.sevellec@insa-rouen.fr}}
     Given a list of points and their coordinates, a neighbouring problem consists in finding, for each point, a list of other points that are considered as its neighbours.
 
     The field of neighbouring problems mainly revolves around the optimisation of the $k$ Nearest Neighbours ($k$-NN) algorithm.
-    As indicated by its name, this method consists in considering the closest $k$ points of each points as their neighbour.
-    [insert KNN reference]
+    As indicated by its name, this method consists in considering the closest $k$ points of each points as their neighbour \cite{art_kNN}.
 
-    Another method consists in the using the Delaunay triangulation. Each couple of points linked by an edge in this triangulation are considered neighbours.
-    [insert Delaunay neighbouring reference]
+    Another method consists in the using the Delaunay triangulation. Each couple of points linked by an edge in this triangulation are considered neighbours \cite{MULCHRONE2003689}.
 
     The default of the $k$-NN method is that it always find the same number of neighbours to each point, independantly to the reality of the geometry around each BS.
     
