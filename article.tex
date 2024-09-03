@@ -176,7 +176,6 @@ brendan.sevellec@insa-rouen.fr}}
 
     \subsection{Additional database}
         In order to compare the results of city detection, a reference database was needed. We therefore used the population data provided by INSEE.
-        [Pas sûr de l'utilité de présenter cette base en fait, ptet juste la principale suffit]
 
 \section{Overview of use methods\label{sec:overview}}
     \subsection{Finding potential neighbours}
@@ -219,7 +218,7 @@ brendan.sevellec@insa-rouen.fr}}
             As a consequence, each edge in $U$ that is longer than a certain value, called \emph{max\_distance}, is suppressed.
 
         \subsubsection{Angle criterion}
-            Let $p$, $q$, $r$ be three BS of $P$, where $q$ and $r$ are $p$'s potential neighbours. As said before, coverage areas of BS are limited by physics, this also implies that $r$ can be \og hidden\fg{} from $p$ by $q$ because $q$ is between $p$ and $r$ [trouver qqch pour prouver ce que je dis].
+            Let $p$, $q$, $r$ be three BS of $P$, where $q$ and $r$ are $p$'s potential neighbours. As said before, coverage areas of BS are limited by physics, this also implies that $r$ can be \og hidden\fg{} from $p$ by $q$ because $q$ is between $p$ and $r$.
 
             Therefore, the connexion between $p$ and $r$ needs to be suppressed. How? The angle $\widehat{qrp}$ is calculated and if it is narrower than a certain value, called \emph{min\_angle}, the longest edge is suppressed.
 
