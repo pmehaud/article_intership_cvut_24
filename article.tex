@@ -74,7 +74,7 @@
     This article aims at enhance the precision of these methods. It also aims at comparing the efficiency of different approaches. 
 
     Therefore, the outcome of the method presented is a neighbouring graph, cf. Figure~\ref{fig:neigh_graph}, where each node is a BS and each edge represent a neighbouring relationship between these two BSs.
-    \begin{figure}
+    \begin{figure}[!b]
         \centering
         \includegraphics[width=3.5in]{images/illus_graphs/neighbouring_graph.png}
         \caption{Illustration of a neighbouring graph.}
@@ -107,7 +107,7 @@
 
         It consists of a substantial collection of $108\,838$ entries, encompassing $29$ distinct features of a size of $\unit[16.7]{Mo}$.
         Each row of the database corresponds to detailed information regarding a specific BS. For the scope of this study, our analysis is focusing on the fields outlined in Table~\ref{table:data_columns}.
-        \begin{table}
+        \begin{table}[!t]
             \centering
             \caption{Description of the main database columns used in the experiments.}
             \label{table:data_columns}
@@ -297,19 +297,19 @@
         As seen before, HDBScan is a method of variable density. In this use case, it is a drawback because the density of base station accurately represents the radius of each base station's coverage. It is therefore not advisable to treat each cluster differently. Plus, this method often presents aberrant clusters like the entire Corsica.
 
         When comparing the cluster detected to the cities that have more than $7\,000$ inhabitants, $3$-NN is the method that has the best result. In fact, if we consider all base station with a $\gamma_p$ value inferior to $\unit[2]{km}$ to be in cities we find that the percentage at accurately classified base station is $88\%$. It is $87\%$ for DBScan and $85\%$ for HDBScan. In Figure~\ref{fig:com_3NN},~\ref{fig:com_dbs} and~\ref{fig:com_hdb} those comparisons are illustrated: in red when the reference and the method agrees on city, in green on countryside and in blue when they don't agree.
-        \begin{figure}
+        \begin{figure}[!b]
             \centering
             \includegraphics[width=3.5in]{images/city_det_comp/comp_3-NN.png}
             \caption{City detection comparison $3$-NN.}
             \label{fig:com_3NN}
         \end{figure}
-        \begin{figure}
+        \begin{figure}[!t]
             \centering
             \includegraphics[width=3.5in]{images/city_det_comp/comp_dbs.png}
             \caption{City detection comparison DBScan.}
             \label{fig:com_dbs}
         \end{figure}
-        \begin{figure}
+        \begin{figure}[!b]
             \centering
             \includegraphics[width=3.5in]{images/city_det_comp/comp_hdbs.png}
             \caption{City detection comparison HDBScan.}
@@ -363,7 +363,7 @@
 
         In Figure~\ref{fig:final_neighs} you have an illustration of a portion of the results. To clarify, the colour of the points, which represent the BSs, is in function of the $\gamma_p$ value.
 
-        \begin{figure}
+        \begin{figure}[!b]
             \centering
             \includegraphics[width=3.5in]{images/illus_graphs/final_neighs_del_da.png}
             \caption{The final neighbouring graph.}
